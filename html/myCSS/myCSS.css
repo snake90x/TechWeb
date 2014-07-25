@@ -1,0 +1,35 @@
+@CHARSET "ISO-8859-1";
+
+/* Tabella mainArea */
+ #dialog label, #dialog input { display:block; }
+ #dialog label { margin-top: 0.5em; }
+ #dialog input, #dialog textarea { width: 95%; }
+ #tabs { margin-top: 1em; }
+ #tabs li .ui-icon-close { float: left; margin: 0.4em 0.2em 0 0; cursor: pointer; }
+ 
+/* Bottoni Menubar */
+ #menuBar { 
+ margin: 4px;
+ width: 100%; 
+ float: right;
+ }
+ #Annotator {float: right;}
+ #About {float: right;}
+ #Help {float: right;}
+ #add_tab {height: 15px; float: right;}
+ 
+/* CSS layout pagina */
+
+#mainArea{
+	float: right;
+	width: 73%;
+}
+#leftpanel{
+	float: left;
+	width: 25%;
+}
+
+#selectable .ui-selecting { background: #FECA40; }
+#selectable .ui-selected { background: #F39814; color: white; }
+#selectable { list-style-type: none; margin: 0; padding: 0; width: relative; }
+#selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px;
