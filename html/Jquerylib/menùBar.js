@@ -9,6 +9,6 @@
 	  alert("Tasto about");
   	});
   $('#Annotator').click(function(){
-	  alert("Tasto annotator");
+	  window.location.href='annotatorClient.html';
   	});
  });

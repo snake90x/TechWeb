@@ -7,34 +7,22 @@
 	<link rel="stylesheet" href="Jquerylib/jquery-ui.css">
 	<script src="Jquerylib/jquery-1.10.2.js"></script>
     <script src="Jquerylib/jquery-ui.js"></script>
-    <script src="Jquerylib/tabs.js"></script>
+    <!-- <script src="Jquerylib/tabs.js"></script> -->
     <script src="Jquerylib/addTab.js"></script>
     <script src="Jquerylib/accordion.js"></script>
     <script src="Jquerylib/menùBar.js"></script>
 
 </head>
 <body>
-	<div id="dialog" title="Tab data">
-	  <form>
-	    <fieldset class="ui-helper-reset">
-	      <label for="tab_title">Title</label>
-	      <input type="text" name="tab_title" id="tab_title" value="Tab Title" class="ui-widget-content ui-corner-all">
-	      <label for="tab_content">Content</label>
-	      <textarea name="tab_content" id="tab_content" class="ui-widget-content ui-corner-all">Tab content</textarea>
-	    </fieldset>
-	  </form>
-	</div>
-	
 	<div id="project">
 	<label>Ann Otaria</label>
 	
 	</div>
  
 	<div id="menuBar">
-		<button id = "Annotator"> Annotator </button>
+		<button id = "Annotator" action="annotatorClient.html"> Annotator </button>
 		<button id = "About"> About </button>
 		<button id = "Help"> Help </button>
-		<button id="add_tab">Add Tab</button>
 	</div>
 	
 	<div id="leftpanel">
@@ -42,22 +30,22 @@
 			<h3>Document List</h3>
 			<div>
 			<ol id="selectable">
-			  <li class="ui-widget-content" value="Adv_Virol_2012_Apr_2_2012_803535.html">Adv_Virol_2012_Apr_2_2012_803535</li>
-			  <li class="ui-widget-content" value="Ann_Med_2012_Sep_3_44(6)_616-626.html">Ann Med 2012 Sep 3</li>
-			  <li class="ui-widget-content" value="Bacteriophage_2011_Jul_1_1(4)_198-206.html">Bacteriophage_2011 Jul 1</li>
-			  <li class="ui-widget-content" value="BMC_Bioinformatics_2008_Jan_23_9_40.html">BMC Bioinformatics 2008 Jan 23</li>
-			  <li class="ui-widget-content" value="BMC_Bioinformatics_2008_Sep_30_9_405.html">BMC Bioinformatics 2008 Sep 30</li>
-			  <li class="ui-widget-content" value="BMC_Cardiovasc_Disord_2012_Jan_31_12_2.html">BMC Cardiovasc Disord 2012 Jan 31</li>
-			  <li class="ui-widget-content" value="BMC_Geriatr_2009_Jul_27_9_31.html">BMC Geriatr 2009 Jul 27</li>
-			  <li class="ui-widget-content" value="BMC_Geriatr_2010_Jan_24_10_3.html">BMC Geriatr 2010 Jan 24</li>
-			  <li class="ui-widget-content" value="BMC_Geriatr_2010_May_27_10_28.html">BMC Geriatr 2010 May 27</li>
-			  <li class="ui-widget-content" value="BMC_Geriatr_2012_Jan_12_12_2.html">BMC Geriatr 2012 Jan 12</li>
-			  <li class="ui-widget-content" value="BMC_Ophthalmol_2011_Jan_21_11_2.html">BMC Ophthalmol 2011 Jan 21</li>
-			  <li class="ui-widget-content" value="BMC_Ophthalmol_2013_Mar_28_13_9.html">BMC Ophthalmol 2013 Mar 28</li>
-			  <li class="ui-widget-content" value="Breast_Cancer_Res_2003_Aug_26_5(6)_281-283.html">Breast Cancer Res 2003 Aug 26 5</li>
-			  <li class="ui-widget-content" value="Breast_Cancer_Res_2004_Feb_17_6(3)_R149-R156.html">Breast Cancer Res 2004 Feb 17 6</li>
-			  <li class="ui-widget-content" value="Breast_Cancer_Res_2006_Mar_20_8(2)_R14.html">Breast Cancer Res 2006 Mar 20 8</li>
-			  <li class="ui-widget-content" value="Breast_Cancer_Res_2008_Mar_10_10(2)_103.html">Breast Cancer Res 2008 Mar 10 10</li>
+			  <li class="ui-widget-content" value="Adv_Virol_2012_Apr_2_2012_803535.html" id="1">Adv_Virol_2012_Apr_2_2012_803535</li>
+			  <li class="ui-widget-content" value="Ann_Med_2012_Sep_3_44(6)_616-626.html" id="2">Ann Med 2012 Sep 3</li>
+			  <li class="ui-widget-content" value="Bacteriophage_2011_Jul_1_1(4)_198-206.html" id="3">Bacteriophage_2011 Jul 1</li>
+			  <li class="ui-widget-content" value="BMC_Bioinformatics_2008_Jan_23_9_40.html" id="4">BMC Bioinformatics 2008 Jan 23</li>
+			  <li class="ui-widget-content" value="BMC_Bioinformatics_2008_Sep_30_9_405.html" id="5">BMC Bioinformatics 2008 Sep 30</li>
+			  <li class="ui-widget-content" value="BMC_Cardiovasc_Disord_2012_Jan_31_12_2.html" id="6">BMC Cardiovasc Disord 2012 Jan 31</li>
+			  <li class="ui-widget-content" value="BMC_Geriatr_2009_Jul_27_9_31.html" id="7">BMC Geriatr 2009 Jul 27</li>
+			  <li class="ui-widget-content" value="BMC_Geriatr_2010_Jan_24_10_3.html" id="8">BMC Geriatr 2010 Jan 24</li>
+			  <li class="ui-widget-content" value="BMC_Geriatr_2010_May_27_10_28.html" id="9">BMC Geriatr 2010 May 27</li>
+			  <li class="ui-widget-content" value="BMC_Geriatr_2012_Jan_12_12_2.html" id="10">BMC Geriatr 2012 Jan 12</li>
+			  <li class="ui-widget-content" value="BMC_Ophthalmol_2011_Jan_21_11_2.html" id="11">BMC Ophthalmol 2011 Jan 21</li>
+			  <li class="ui-widget-content" value="BMC_Ophthalmol_2013_Mar_28_13_9.html" id="12">BMC Ophthalmol 2013 Mar 28</li>
+			  <li class="ui-widget-content" value="Breast_Cancer_Res_2003_Aug_26_5(6)_281-283.html" id="13">Breast Cancer Res 2003 Aug 26 5</li>
+			  <li class="ui-widget-content" value="Breast_Cancer_Res_2004_Feb_17_6(3)_R149-R156.html" id="14">Breast Cancer Res 2004 Feb 17 6</li>
+			  <li class="ui-widget-content" value="Breast_Cancer_Res_2006_Mar_20_8(2)_R14.html" id="15">Breast Cancer Res 2006 Mar 20 8</li>
+			  <li class="ui-widget-content" value="Breast_Cancer_Res_2008_Mar_10_10(2)_103.html" id="16">Breast Cancer Res 2008 Mar 10 10</li>
 			</ol>	
 			</div>
 		</div>
@@ -66,31 +54,14 @@
 		    <div>
 		      <p>Mauris mauris ante, blandit et, ultrices a, suscipit eget, quam. Integer ut neque. Vivamus nisi metus, molestie vel, gravida in, condimentum sit amet, nunc. Nam a nibh. Donec suscipit eros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate.</p>
 		    </div>
-		    <h3>Section 2</h3>
-		    <div>
-		      <p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. In suscipit faucibus urna. </p>
-		    </div>
-		    <h3>Section 3</h3>
-		    <div>
-		      <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo, magna quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
-		      <ul>
-		        <li>List item one</li>
-		        <li>List item two</li>
-		        <li>List item three</li>
-		      </ul>
-		    </div>
-		    <h3>Section 4</h3>
-		    <div>
-		      <p>Cras dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aenean lacinia mauris vel est. </p><p>Suspendisse eu nisl. Nullam ut libero. Integer dignissim consequat lectus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. </p>
-		    </div>
 		</div>
 	</div>
 	<div id="mainArea">
 		<ul>
-			<li><a href="#tabs-1">Adv Virol 2012 Apr 2 2012</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
+			<li><a href="#tabs-1">Adv_Virol_2012_Apr_2_2012_803535.html</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li>
 		</ul>
 		<div id="tabs-1">
-			<iframe id= "Doc-0" src="annotaria-td\Adv_Virol_2012_Apr_2_2012_803535.html"></iframe>
+			<iframe id= "Doc-1" class = "Doc" src="annotaria-td\Adv_Virol_2012_Apr_2_2012_803535.html"></iframe>
 		</div>
 	</div>
 </body>
