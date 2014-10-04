@@ -1,10 +1,45 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Annotator</title>
-</head>
-<body>
+	<head>
+		<meta charset="ISO-8859-1">
+		<title>Annotator</title>
+		<link rel="stylesheet" href="Jquerylib/jquery-ui.css">
+		<script src="Jquerylib/jquery-1.10.2.js"></script>
+    	<script src="Jquerylib/jquery-ui.js"></script>
+		<script type="text/javascript" src="Jquerylib\bootstrap.min.js"></script>
+		<link href="Jquerylib\bootstrap.min.css" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="myCSS/annotatorCSS.css"/>
+	</head>
+	<body>
+		<div class="col-md-3">
+			<div class="row clearfix">
+				<ul class="nav nav-tabs">
+				  <li class="active"><a href="#view" data-toggle="tab" id="showView">Vista</a></li>
+				  <li><a href="#edit" data-toggle="tab" id="showEdit">Modifica</a></li>
+				</ul>
 
-</body>
+				<div class="tab-content">
+					<div class="tab-pane active border border-notop" id="view">
+						<form role="form">
+							<div class="checkbox"><label>
+								<input type="checkbox" id="main">Frasi principali</label></div>
+							<div class="checkbox"><label>
+								<input type="checkbox" id="sub">Frasi secondarie</label></div>
+							<div class="form-group"><label>Scegli la frase:</label>
+								<input type="number" id="sentence" name="sentence" min="0" max="10" value="0">
+							</div>
+						</form>
+					</div>
+					<div class="tab-pane border border-notop" id="edit">
+						<button type="button" class="btn btn-warning" id="markSentence">Frase</button>						
+						<button type="button" class="btn btn-info" id="markMain">Principale</button>						
+						<button type="button" class="btn btn-success" id="markSub">Subordinata</button>						
+					</div>
+				</div>
+			</div>
+		</div>		
+		<div id="article">
+			
+		</div>
+	</body>
 </html>

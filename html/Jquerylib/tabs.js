@@ -1,5 +1,5 @@
 /**
- * crea e gestisce le funzioni della struttura tabs
+ * crea e gestisce le funzioni della struttura tabs NON FUNZIONA
  */
 $(function(){
     var tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";

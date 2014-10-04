@@ -4,7 +4,9 @@
 
 /*docArea*/
 $(function() {
-	   $( "#docArea" ).accordion();
+	   $( "#docArea" ).accordion({
+		   heightStyle: "fill"
+	   });
 });
 //funzione addTab aggiunge una nuova tab al momento del click
 
@@ -62,6 +64,7 @@ $(function() {
         $( ".ui-selected", this ).each(function() {
           var index = $( "#selectable li" ).index( this );
           index=index+1;
+          (".ui-selected", this).setAttribute("id", index.toString());
           addTab(index);
         });
       }
