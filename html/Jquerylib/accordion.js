@@ -12,7 +12,7 @@ $(function() {
 
 $(function() {
 	
-	var tabTemplate = "<li><a href='#{href}'>#{label}</a> <span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span></li>";
+	var tabTemplate = "<li><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span> <a href='#{href}'>#{label}</a> </li>";
     
 	
 	var tabs = $( "#mainArea" ).tabs();
@@ -20,9 +20,10 @@ $(function() {
 	function addTab(index) {
 			//alert(index.toString());
 	        var label =  document.getElementById(index.toString()).getAttribute("value");
+	        var title = document.getElementById (index.toString()).innerHTML;
 	        //alert(label);
 	        var id = "tabs-" + index.toString(),
-	        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, label ) ),
+	        li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
 	        tabContentHtml = '<iframe id="Doc-'+index.toString()+'" class="Doc" src="annotaria-td\\'+label+'"></iframe>';
 	        var tabNameExists = false;
 	        //alert(tabContentHtml);
@@ -39,9 +40,8 @@ $(function() {
 	    	    tabs.tabs( "refresh" );
 	    	    tabs.tabs( "option", "active", -1 );
 	    	    
-	        }
+	        }     
 	        
-          
 	      
 	    }
 	

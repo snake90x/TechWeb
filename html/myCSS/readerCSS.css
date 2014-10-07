@@ -13,11 +13,9 @@
 }
 
 /* Tabella mainArea */
- #dialog label, #dialog input { display:block; font-size: 10px;}
- #dialog label { margin-top: 0.5em; font-size: px;}
- #dialog input, #dialog textarea { width: 95%; font-size: 10px; }
  #tabs { margin-top: 1em; font-size: 10px;}
- #tabs li .ui-icon-close { float: right !important; margin: 0.4em 0.2em 0 0 !important; cursor: pointer !important; font-size: 8px;}
+ #tabs li .ui-icon-close { float:left !important; margin: 0.4em 0.2em 0 0 !important; cursor: pointer !important; font-size: 8px;}
+ .ui-tabs .ui-tabs-nav li {width:200px !important; overflow:hidden; padding:2px !important;}
  
 /* Bottoni Menubar */
  #menuBar { 
@@ -143,7 +141,7 @@
 #selectable .ui-selecting { background: #9198AD; font-size: 10px;}
 #selectable .ui-selected { background: #5E6270; color: white; font-size: 10px;}
 #selectable { list-style-type: none; margin: 0; padding: 0; width: relative; font-size: 10px;}
-#selectable li { margin: 3px; padding: 0.4em; font-size: 1.4em; height: 18px;font-size: 10px;}
+#selectable li {padding:0.4em; font-size: 1.4em; height: 20xpx; width:99%;font-size: 10px;margin-top:3px;}
 
 
 
