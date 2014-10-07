@@ -37,6 +37,8 @@ $(function() {
 	        	tabs.find( ".ui-tabs-nav" ).append( li );
 	    	    tabs.append( "<div id='" + id + "'>" + tabContentHtml + "</div>" );
 	    	    tabs.tabs( "refresh" );
+	    	    tabs.tabs( "option", "active", -1 );
+	    	    
 	        }
 	        
           
