@@ -8,21 +8,34 @@
 	<link rel="stylesheet" href="Jquerylib/jquery-ui.css">
 	<script src="Jquerylib/jquery-1.10.2.js"></script>
     <script src="Jquerylib/jquery-ui.js"></script>
-    <!--<script src="Jquerylib/tabs.js"></script> 
-    <!-- <script src="Jquerylib/addTab.js"></script> -->
-    <script src="Jquerylib/accordion.js"></script>
+    <script src="Jquerylib/tabs.js"></script>
     <script src="Jquerylib/menùBar.js"></script>
     <script src="Jquerylib/Server.js"></script>
+    <script src="Jquerylib/cookies.js"></script>
+    
 
 </head>
 <body>
+	
+	<div id="dialog" title="Login">
+	  <form>
+		<fieldset class="ui-helper-reset">
+		  <label for="tab_title">Insert Name</label>
+		  <input type="text" name="username" id="username" value="Name" class="ui-widget-content ui-corner-all" onclick="this.select();">
+		</fieldset>
+	  </form>
+	</div>
+ 
+	
+	
 	<div id="project">
 	<label>Ann Otaria</label>
 	
 	</div>
  
 	<div id="menuBar">
-		<button id = "Annotator" action="annotatorClient.html"> Annotator </button>
+		<span class="welcomespan"> Benvenuto</span>
+		<button id = "Annotator"> Annotator </button>
 		<button id = "About"> About </button>
 		<button id = "Help"> Help </button>
 	</div>
@@ -36,8 +49,11 @@
 			</div>
 		</div>
 		<div id="metaArea">
-			<h3>Annotazioni</h3>
-		    <div>
+		    <ul>
+				<li><a href="#annotazioni">Annotazioni</a></li>
+		    
+		    </ul>
+		    <div id="annotazioni">
 		    	<form role="form">
 						<div class="checkbox"><label>
 							<input type="checkbox" id="main">Frasi principali</label></div>
@@ -47,7 +63,7 @@
 							<input type="number" id="sentence" name="sentence" min="0" max="10" value="0">
 						</div>
 				</form>
-		    </div>
+			</div>
 		</div>
 	</div>
 	<div id="mainArea">
