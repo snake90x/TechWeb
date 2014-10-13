@@ -8,6 +8,7 @@ $(function() {
 		   heightStyle: "fill"
 	   });
 });
+
 //funzione addTab aggiunge una nuova tab al momento del click
 
 $(function() {

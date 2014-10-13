@@ -13,7 +13,11 @@
 		  //inserire if cookie == user, campo vuoto, else esegui modifica e span.
 		  modifica();
 		  $('span.welcomespan').each(function() {
-				$(this).append('<span>, '+user+'     <a href="#" onClick="">esci</a></span>');
+				$(this).append('<span>, '+user+'     <a href="#" onClick="cancellaCookie()">esci</a></span>');
+				scriviCookie(user);
+				alert(user);
+				leggiCookie(user);
+				
 		  });
 		  $( this ).dialog( "close" );
 		},
@@ -70,6 +74,7 @@
   	});
   $('#Annotator').click(function(){
 	    dialog.dialog( "open" );
+	    
   	});
  });
  
