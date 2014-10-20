@@ -16,7 +16,7 @@
 /* Tabella mainArea */
  #tabs { margin-top: 1em; font-size: 10px;}
  #tabs li .ui-icon-close { float:left !important; margin: 0.4em 0.2em 0 0 !important; cursor: pointer !important; font-size: 8px;}
- .ui-tabs .ui-tabs-nav li {width:100px !important; overflow:hidden; padding:2px !important; height:30px !important;}
+ .ui-tabs .ui-tabs-nav li {width:100px !important; overflow:hidden; padding:2px !important; height:25px !important;}
  
 /* Bottoni Menubar */
  #menuBar { 

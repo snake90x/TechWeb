@@ -3,12 +3,13 @@
  */
  
 	$(document).ready(function(){
+		
 /* script implementazione dialog box*/
 	var dialog = $( "#dialog" ).dialog({
 	  autoOpen: false,
 	  modal: true,
 	  buttons: {
-		Log: function() {
+		  Log: function() {
 		  document.getElementById('Annotator').disabled = 'disabled'; 
 		  var user = document.getElementById('username').value;
 		  if(user=="" || user=="Name"){
@@ -21,12 +22,8 @@
 				leggiCookie(user);
 				
 		  });
-		  $( this ).dialog( "close" );
-		  
+		  $( this ).dialog( "close" );  
 		},
-		Cancel: function() {
-		  $( this ).dialog( "close" );
-		}
 	  },
 	  close: function() {
 		form[ 0 ].reset();

@@ -514,8 +514,6 @@ button.ui-button::-moz-focus-inner {
 	text-align: left;
 	border-width: 1px 0 0 0;
 	background-image: none;
-	margin-top: .5em;
-	padding: .3em 1em .5em .4em;
 }
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset {
 	float: right;
@@ -644,6 +642,8 @@ button.ui-button::-moz-focus-inner {
 	margin-top: -8px;
 	position: absolute;
 	top: 50%;
+	float: left;
+	overflow: auto;
 }
 .ui-selectmenu-button span.ui-selectmenu-text {
 	text-align: left;
@@ -790,15 +790,14 @@ button.ui-button::-moz-focus-inner {
 	margin: 1px .2em 0 0;
 	border-bottom-width: 0;
 	padding: 0;
-	white-space: nowrap;
+	white-space: normal;
 }
 .ui-tabs .ui-tabs-nav .ui-tabs-anchor {
-	float: left;
-	padding: .5em 1em;
+	/*0float: left;*/
+	/*padding: .5em 1em;*/
 	text-decoration: none;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active {
-	margin-bottom: -1px;
 	padding-bottom: 1px;
 }
 .ui-tabs .ui-tabs-nav li.ui-tabs-active .ui-tabs-anchor,
@@ -975,6 +974,8 @@ body .ui-tooltip {
 .ui-icon {
 	width: 16px;
 	height: 16px;
+	float: left;
+	clear: left;
 }
 .ui-icon,
 .ui-widget-content .ui-icon {

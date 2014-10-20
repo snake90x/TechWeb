@@ -1,4 +1,4 @@
-
+// caricamento del database tramite un file json che contiene i documenti con i propri riferimenti
 
 $(document).ready(main);
 

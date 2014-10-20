@@ -22,7 +22,8 @@
 				var tabNameExists = false;
 				$('#mainArea ul li a').each(function(i) {
 					if (this.text == title) {
-						tabNameExists = true;
+						tabNameExists = true;	
+						this.click();	
 					} 
 				});
 				
@@ -31,7 +32,7 @@
 					tabs.append( "<div id='" + id + "'>" + tabContentHtml + "</div>" );
 					tabs.tabs( "refresh" );
 					tabs.tabs( "option", "active", -1 );    
-				}      
+				}   
 		}
 		
 		// close icon: chiude le tabs cliccando la x
