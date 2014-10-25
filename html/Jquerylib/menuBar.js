@@ -52,12 +52,12 @@
  
 /* implementazione di meta area come una tab JQuery*/
 	 var tabs = $( "#metaArea" ).tabs();
-	 var tabTemplate = "<li><a href='#{href}'>#{label}</a> </li>";
+	 var tabTemplate = "<li><a href='#{href}' data-toggle='tab' id='showEdit'>#{label}</a> </li>";
 	 function modifica(user) {
 				var title = "Modifica";
 				var id = "modifica",
 				li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
-				tabContentHtml = "<button type='button' class='btn btn-warning' id='markSentence'>Frase</button><button type='button' class='btn btn-info' id='markMain'>Principale</button><button type='button' class='btn btn-success' id='markSub'>Subordinata</button>";
+				tabContentHtml = "<button type='button' class='btn btn-warning' id='markSentence'>Frase</button><button type='button' class='btn btn-info' id='markMain'>Principale</button><button type='button' class='btn btn-success' id='markSub'>Subordinata</button></br><button type='button' class='btn btn-success' id='save'>Salva Nota</button>";
 				var tabNameExists = false;
 				$('#metaArea ul li a').each(function(i) {
 					if (this.text == title) {

@@ -1,30 +1,14 @@
-// caricamento del database tramite un file json che contiene i documenti con i propri riferimenti
 
 // gestione dell'inserimento,salvataggio e visualizzazione delle annotazioni
 
 var notes = {} ; //struttura dati nota
+var dataLoaded = 0 ;
 var mode = 'view' //modalità modifica o visualizza
-var pathnote=[];
 
 $(document).ready(main);
 
-		function main() {
-			$.ajax({
-				method: 'GET',
-				url: 'database.json',
-				success: function(d) {
-					for (var i=0; i<d.length; i++) {
-						$('#selectable').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
-						pathnote[i]=d[i].notes;
-					}	
-				},
-				error: function(a,b,c) {
-					alert('Nessun documento da mostrare')
-				}
-			});
-			
-			
-					// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
+function main() {
+		// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
 	$('#main').click(function() {
 		if (this.checked) 
 			$('.main').addClass('text-primary')
@@ -79,40 +63,55 @@ $(document).ready(main);
 	
 }
 
-// funzioni richiamate e utilizzate all'interno di main
 
-// carica i json delle note
-function load(index) {
-   
-	notes.filename = pathnote[index];
+
+// funzioni richiamate e utilizzate all'interno di main
+function load(file,notelist) {
+	dataLoaded = 0 ;
+	notes.filename = notelist
 	$.ajax({
 		method: 'GET',
-		url: pathnote[index],
+		url: file,
+		success: function(d) {
+			dataLoaded++ ;
+			$('#file').html(d)
+			$('#title').html($('#file h1'))
+			if (dataLoaded == 2) showNotes()
+		},
+		error: function(a,b,c) {
+			alert('Non ho potuto caricare il file '+file)
+		}
+	});
+	$.ajax({
+		method: 'GET',
+		url: notelist,
 		success: function(d) {
 			notes.data = d
-			showNotes()
+			dataLoaded++ ;
+			if (dataLoaded == 2) showNotes()
 		},
 		error: function(a,b,c) {
 			alert('Non ho potuto caricare le annotazioni per il file '+file)
 			notes.data = []
-			showNotes()
+			dataLoaded++ ;
+			if (dataLoaded == 2) showNotes()
 		}
 	});
 }
 
-//~ function saveNotes() {
-	//~ $.ajax({
-		//~ method: 'POST',
-		//~ url: "save.php",
-		//~ data: JSON.stringify(notes),
-		//~ success: function(d) {
-			//~ alert("Note salvate")
-		//~ },
-		//~ error: function(a,b,c) {
-			//~ alert('Non ho potuto salvare le note')
-		//~ }
-	//~ });
-//~ }
+function saveNotes() {
+	$.ajax({
+		method: 'POST',
+		url: "save.php",
+		data: JSON.stringify(notes),
+		success: function(d) {
+			alert("Note salvate")
+		},
+		error: function(a,b,c) {
+			alert('Non ho potuto salvare le note')
+		}
+	});
+}
 
 function showNotes() {
 	for (var i=0; i< notes.data.length; i++) {
@@ -173,4 +172,3 @@ NodeList.prototype.indexOf = function(n) {
 	while (this.item(i) !== n) {i++} ; 
 	return i 
 }	
-
