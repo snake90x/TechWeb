@@ -43,24 +43,6 @@ function main() {
 		saveNotes()
 	})
 	
-	
-	
-	/* se è aperta la tab edit passa alla modalità edit in cui sono visualizzate le classi css(per colorare), altrimenti passa alla 
-	 modalità view e le rimuove*/
-	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		if (e.target.id=='modifica') {
-			mode = 'edit'
-			$('.sentence').addClass('edit-sentence')
-			$('.main').addClass('edit-main')
-			$('.sub').addClass('edit-sub')
-		} else {
-			mode = 'view'
-			$('.sentence').removeClass('edit-sentence')
-			$('.main').removeClass('edit-main')
-			$('.sub').removeClass('edit-sub')
-		}
-	})
-	
 }
 
 

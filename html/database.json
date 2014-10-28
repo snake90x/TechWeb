@@ -63,5 +63,9 @@
             "label": "Breast Cancer Research – the first ten years",
             "url": "Breast_Cancer_Res_2008_Mar_10_10(2)_103.html",
             "notes": "Breast_Cancer_Res_2008_Mar_10_10(2)_103.json"
+    },{
+			"label": "King Crimson",
+            "url": "King_Crimson.html",
+            "notes": "annotaria-td/King_Crimson_notes.json"
     }
 ]

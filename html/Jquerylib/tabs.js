@@ -10,29 +10,41 @@
 //funzione addTab aggiunge una nuova tab al momento del click
 	$(function() {
 	
-		var tabTemplate = "<li><span class='ui-icon ui-icon-close' role='presentation'>Remove Tab</span> <a href='#{href}'>#{label}</a> </li>";
+		var tabTemplate = "<li><span class='ui-icon ui-icon-close' data-toggle='filetab' role='presentation'>Remove Tab</span> <a href='#{href}'>#{label}</a> </li>";
 		var tabs = $( "#mainArea" ).tabs();
 		
-		function addTab(index) {
-				var label =  document.getElementById(index.toString()).getAttribute("value");
-				var title = document.getElementById (index.toString()).innerHTML;
-				var id = "tabs-" + index.toString(),
-				li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
-				tabContentHtml = '<iframe id="Doc-'+index.toString()+'" class="Doc" src="annotaria-td\\'+label+'"></iframe>';
-				var tabNameExists = false;
-				$('#mainArea ul li a').each(function(i) {
-					if (this.text == title) {
-						tabNameExists = true;	
-						this.click();	
-					} 
-				});
-				
-				if (tabNameExists == false){
-					tabs.find( ".ui-tabs-nav" ).append( li );
-					tabs.append( "<div id='" + id + "'>" + tabContentHtml + "</div>" );
-					tabs.tabs( "refresh" );
-					tabs.tabs( "option", "active", -1 );    
-				}   
+		function addTab(file,index) {
+				$.ajax({
+				method: 'GET',
+				url: file,
+				success: function(d) {
+					//dataLoaded++ ;
+					var title = document.getElementById(index.toString()).innerHTML;
+					var id = "tabs-" + index.toString(),
+					li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) );
+					//if (dataLoaded == 2) showNotes()
+					var tabNameExists = false;
+					$('#mainArea ul li a').each(function(i) {
+						if (this.text == title) {
+							tabNameExists = true;	
+							this.click();	
+						} 
+					});
+					
+					if (tabNameExists == false){
+						tabs.find( ".ui-tabs-nav" ).append( li );
+						tabs.append( "<div id='" + id + "' class = 'Doc'></div>" );
+						$('#'+id).html(d);
+						tabs.tabs( "refresh" );
+						tabs.tabs( "option", "active", -1 );
+						
+					}
+				},
+				error: function(a,b,c) {
+					alert('Non ho potuto caricare il file '+file)
+				}
+			});
+				   
 		}
 		
 		// close icon: chiude le tabs cliccando la x
@@ -55,8 +67,10 @@
 					$( ".ui-selected", this ).each(function() {
 						var index = $( "#selectable li" ).index( this );
 						(".ui-selected", this).setAttribute("id", index.toString());
-						addTab(index);
-						load(index);
+						var url =  "annotaria-td/"+(".ui-selected", this).getAttribute("value");
+						addTab(url,index);
+						$( window ).load
+						(load(index));
 					});
 				}
 			});

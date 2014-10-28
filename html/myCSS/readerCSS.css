@@ -3,6 +3,8 @@
 /* Scritta Iniziale */
 #project{
 	margin-bottom: 10px;
+	margin-top: 10px;
+	margin-left:1%;
 	height: 45px;
 	font-family: Garamond, serif;
 	line-height: 1em;
@@ -16,14 +18,15 @@
 /* Tabella mainArea */
  #tabs { margin-top: 1em; font-size: 10px;}
  #tabs li .ui-icon-close { float:left !important; margin: 0.4em 0.2em 0 0 !important; cursor: pointer !important; font-size: 8px;}
- .ui-tabs .ui-tabs-nav li {width:100px !important; overflow:hidden; padding:2px !important; height:25px !important;}
+ .addtab{width:100% !important; padding:2px !important; height:34px !important;}
+ .ui-tabs .ui-tabs-nav li {width:100px !important; overflow:hidden; padding:2px !important; height:30px !important;}
+ 
  
 /* Bottoni Menubar */
  #menuBar { 
  margin: 4px;
- width: 100%; 
- float: right;
- 
+ width: 99%; 
+ float: right; 
  }
  #Annotator {	float: right;
 				font-family: 'courier new';
@@ -120,6 +123,8 @@
 .Doc{
 	width: 100%;
 	height: 470px;
+	overflow: scroll;
+	font-size:13px;
 }
 
 #leftpanel{
@@ -127,16 +132,33 @@
 	width: 25%;
 	height: 545px;
 	font-size: 10px;
+	margin-top:0px;
+	margin-left:1%;
 	
 }
 
+#lista{
+	height: 34px;
+}
+
+#annotazioni{
+	margin: 10px;
+	padding:0px;
+}
+
+#metaArea{
+	height:145px;
+}
+
 #docArea{
-	height: 75%;
+	height: 71%;
 	margin: 4px;
-	margin-bottom:10px;
 }
 
 #ui-id-2{
+	height:360px !important;
+}
+#ui-id-4{
 	height:360px !important;
 }
 
@@ -150,5 +172,28 @@
 #dialog label { margin-top: 0.5em; }
 #dialog input, #dialog textarea { width: 95%; }
 
+.border {
+	border: solid rgb(220,220,220) 1px;
+	padding: 10px;
+	margin-bottom: 15px; 
+}
+.border-notop {
+	border-top: none;
+}
 
+.breath {
+	margin-top: 15px;
+}
 
+.edit-sentence {
+	padding: 2px;
+	border: dotted #d58512; 3px;			
+}
+.edit-main {
+	background-color: #7be0fe;	
+	color: white;		
+}
+.edit-sub {
+	background-color: #77d477;			
+	color: white;		
+}

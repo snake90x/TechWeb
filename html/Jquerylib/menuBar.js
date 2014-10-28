@@ -51,7 +51,12 @@
     });
  
 /* implementazione di meta area come una tab JQuery*/
-	 var tabs = $( "#metaArea" ).tabs();
+	 var tabs = $( "#metaArea" ).tabs({
+        activate: function(event, ui) {
+			controllotab();
+        
+    }
+});
 	 var tabTemplate = "<li><a href='#{href}' data-toggle='tab' id='showEdit'>#{label}</a> </li>";
 	 function modifica(user) {
 				var title = "Modifica";

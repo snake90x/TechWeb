@@ -5,23 +5,26 @@
 var notes = {} ; //struttura dati nota
 var mode = 'view' //modalità modifica o visualizza
 var pathnote=[];
-
+var cacca=0;
 $(document).ready(main);
 
-		function main() {
-			$.ajax({
-				method: 'GET',
-				url: 'database.json',
-				success: function(d) {
-					for (var i=0; i<d.length; i++) {
-						$('#selectable').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
-						pathnote[i]=d[i].notes;
-					}	
-				},
-				error: function(a,b,c) {
-					alert('Nessun documento da mostrare')
-				}
-			});
+function main() {
+	$.ajax({
+		method: 'GET',
+		url: 'database.json',
+		//type:'json',
+		success: function(d) {
+			cacca++;
+			for (var i=0; i<d.length; i++) {
+				$('#selectable').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
+				pathnote[i]=d[i].notes;
+			}	
+		},
+		error: function(a,b,c) {
+			cacca++;
+			alert('Nessun documento da mostrare')
+		}
+	});
 			
 			
 					// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
@@ -52,32 +55,31 @@ $(document).ready(main);
 	$('#markSub').click(function() {
 		addNote('sub')
 	})
-	$('#markSub').click(function() {
-		addNote('sub')
-	})
 	$('#save').click(function() {
 		saveNotes()
 	})
 	
-	
-	
+
+		
+
+}
 	/* se è aperta la tab edit passa alla modalità edit in cui sono visualizzate le classi css(per colorare), altrimenti passa alla 
 	 modalità view e le rimuove*/
-	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-		if (e.target.id=='modifica') {
+	function controllotab(){
+		if($('#annotazioni').attr("aria-hidden")== "false"){ 
+			alert("siamo in edit")
 			mode = 'edit'
 			$('.sentence').addClass('edit-sentence')
 			$('.main').addClass('edit-main')
 			$('.sub').addClass('edit-sub')
-		} else {
+		}else{
+			alert("siamo in annotazioni")
 			mode = 'view'
 			$('.sentence').removeClass('edit-sentence')
 			$('.main').removeClass('edit-main')
 			$('.sub').removeClass('edit-sub')
 		}
-	})
-	
-}
+	};		
 
 // funzioni richiamate e utilizzate all'interno di main
 
@@ -85,34 +87,45 @@ $(document).ready(main);
 function load(index) {
    
 	notes.filename = pathnote[index];
+	alert(pathnote[index])
 	$.ajax({
 		method: 'GET',
 		url: pathnote[index],
+		//type:'json',
 		success: function(d) {
+			
+			console.log("successo")
 			notes.data = d
-			showNotes()
+			for(var i=0; i< notes.data.length; i++){
+				alert(notes.data[i].type)
+			}
+			cacca++;
+			if(cacca==2)showNotes()
 		},
 		error: function(a,b,c) {
-			alert('Non ho potuto caricare le annotazioni per il file '+file)
+			
+			console.log("errore")
+			alert('Non ho potuto caricare le annotazioni per il file ')
 			notes.data = []
-			showNotes()
+			cacca++;
+			if(cacca==2)showNotes()
 		}
 	});
 }
 
-//~ function saveNotes() {
-	//~ $.ajax({
-		//~ method: 'POST',
-		//~ url: "save.php",
-		//~ data: JSON.stringify(notes),
-		//~ success: function(d) {
-			//~ alert("Note salvate")
-		//~ },
-		//~ error: function(a,b,c) {
-			//~ alert('Non ho potuto salvare le note')
-		//~ }
-	//~ });
-//~ }
+function saveNotes() {
+	$.ajax({
+		method: 'POST',
+		url: "save.php",
+		data: JSON.stringify(notes),
+		success: function(d) {
+			alert("Note salvate")
+		},
+		error: function(a,b,c) {
+			alert('Non ho potuto salvare le note')
+		}
+	});
+}
 
 function showNotes() {
 	for (var i=0; i< notes.data.length; i++) {
@@ -155,8 +168,9 @@ function addNote(type) {
 
 function insertNote(note,active) {
 	var r = document.createRange()
+	alert(note.type)
 	var node = $('#'+note.node)[0].childNodes[note.pos]
-	r.setStart(node,note.start);
+	r.setStart(node,note.start)
 	r.setEnd(node,note.end)
 	var span = document.createElement('span')
 	span.setAttribute('id',note.id)
