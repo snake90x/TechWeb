@@ -2,20 +2,23 @@
 
 // gestione dell'inserimento,salvataggio e visualizzazione delle annotazioni
 
-var notes = {} ; //struttura dati nota
+var notes = []; //struttura dati nota
 var mode = 'view' //modalità modifica o visualizza
 var pathnote=[];
 var cacca=0;
 $(document).ready(main);
 
+
 function main() {
 	$.ajax({
+		 
 		method: 'GET',
 		url: 'database.json',
 		//type:'json',
 		success: function(d) {
 			cacca++;
 			for (var i=0; i<d.length; i++) {
+				notes[i]= {};
 				$('#selectable').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
 				pathnote[i]=d[i].notes;
 			}	
@@ -46,18 +49,7 @@ function main() {
 		s.removeClass('bg-warning')
 		$(s[v-1]).addClass('bg-warning')
 	})
-	$('#markSentence').click(function() {
-		addNote('sentence')
-	})
-	$('#markMain').click(function() {
-		addNote('main')
-	})
-	$('#markSub').click(function() {
-		addNote('sub')
-	})
-	$('#save').click(function() {
-		saveNotes()
-	})
+	
 	
 
 		
@@ -89,13 +81,15 @@ function load(index) {
 	notes.filename = pathnote[index];
 	alert(pathnote[index])
 	$.ajax({
+		cache: false,
 		method: 'GET',
 		url: pathnote[index],
-		//type:'json',
+
 		success: function(d) {
 			
 			console.log("successo")
 			notes.data = d
+			alert("get sul file "+pathnote[index]);
 			for(var i=0; i< notes.data.length; i++){
 				alert(notes.data[i].type)
 			}
@@ -150,7 +144,7 @@ function addNote(type) {
 		var dad = s.anchorNode.parentElement
 		var guida = s.anchorNode.substringData(s.anchorOffset,20)
 		if (compatibleExtremes(s)) {
-			var spanId = 'span-'+ ($('#file span').length+1)
+			var spanId = 'span-'+ ($('span').length+1)
 			var pos = dad.childNodes.indexOf(s.anchorNode)
 			var n = {
 				type: type,

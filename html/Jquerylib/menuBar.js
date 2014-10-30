@@ -15,6 +15,7 @@
 		  if(user=="" || user=="Name"){
 			return alert("Username non valido")}
 		  modifica();
+		  
 		  $('span.welcomespan').each(function() {
 				$(this).append('<span>, '+user+'     <a href="#" onClick="cancellaCookie()">esci</a></span>');
 				scriviCookie(user);
@@ -46,6 +47,7 @@
 /* script ricarica dialog se chiusa*/	
 	var form = dialog.find( "form" ).submit(function( event ) {
       modifica();
+      
       dialog.dialog( "close" );
       event.preventDefault();
     });
@@ -75,7 +77,23 @@
 					tabs.append( "<div id='" + id + "'>" + tabContentHtml + "</div>" );
 					tabs.tabs( "refresh" );
 					tabs.tabs( "option", "active", -1 );
+					$('#markSentence').click(function() {
 					
+					alert("click su frase")
+					addNote('sentence')
+				})
+				$('#markMain').click(function() {
+					alert("click su frase")
+					addNote('main')
+				})
+				$('#markSub').click(function() {
+					alert("click su frase");
+					addNote('sub')
+				})
+				$('#save').click(function() {
+					alert("click su frase")
+					saveNotes()
+				})
 				}     
 				
 			  
@@ -96,6 +114,7 @@
 
 		$('#Annotator').click(function(){
 			dialog.dialog( "open" );
+			
 		});
 	
 	
