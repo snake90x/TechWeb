@@ -2,21 +2,22 @@
 
 // gestione dell'inserimento,salvataggio e visualizzazione delle annotazioni
 
-var notes = []; //struttura dati nota
-var mode = 'view' //modalità modifica o visualizza
-var pathnote=[];
-var cacca=0;
+var notes = []; // struttura dati nota
+var mode = 'view' // modalità modifica o visualizza
+var pathnote=[]; // salva tutti i link ai file json in base agli indici di ogni documento 
+
+
 $(document).ready(main);
 
-
 function main() {
+	scriviCookie("");
+	
 	$.ajax({
 		 
 		method: 'GET',
 		url: 'database.json',
 		//type:'json',
 		success: function(d) {
-			cacca++;
 			for (var i=0; i<d.length; i++) {
 				notes[i]= {};
 				$('#selectable').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
@@ -24,13 +25,13 @@ function main() {
 			}	
 		},
 		error: function(a,b,c) {
-			cacca++;
 			alert('Nessun documento da mostrare')
 		}
+
 	});
-			
-			
-					// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
+
+
+	// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
 	$('#main').click(function() {
 		if (this.checked) 
 			$('.main').addClass('text-primary')
@@ -49,11 +50,10 @@ function main() {
 		s.removeClass('bg-warning')
 		$(s[v-1]).addClass('bg-warning')
 	})
+
+
 	
 	
-
-		
-
 }
 	/* se è aperta la tab edit passa alla modalità edit in cui sono visualizzate le classi css(per colorare), altrimenti passa alla 
 	 modalità view e le rimuove*/
@@ -78,8 +78,7 @@ function main() {
 // carica i json delle note
 function load(index) {
    
-	notes.filename = pathnote[index];
-	alert(pathnote[index])
+	notes[index].filename = pathnote[index]
 	$.ajax({
 		cache: false,
 		method: 'GET',
@@ -88,23 +87,23 @@ function load(index) {
 		success: function(d) {
 			
 			console.log("successo")
-			notes.data = d
-			alert("get sul file "+pathnote[index]);
-			for(var i=0; i< notes.data.length; i++){
-				alert(notes.data[i].type)
+			notes[index].data = d
+			for(var i=0; i< notes[index].data.length; i++){
+				console.log(notes[index].data[i].type)
 			}
-			cacca++;
-			if(cacca==2)showNotes()
+			showNotes(index)
 		},
 		error: function(a,b,c) {
 			
 			console.log("errore")
 			alert('Non ho potuto caricare le annotazioni per il file ')
-			notes.data = []
-			cacca++;
-			if(cacca==2)showNotes()
+			notes[index].data = []
+			showNotes(index)
 		}
 	});
+
+
+
 }
 
 function saveNotes() {
@@ -121,9 +120,9 @@ function saveNotes() {
 	});
 }
 
-function showNotes() {
-	for (var i=0; i< notes.data.length; i++) {
-		insertNote(notes.data[i],mode=='edit')
+function showNotes(index) {
+	for (var i=0; i< notes[index].data.length; i++) {
+		insertNote(notes[index].data[i],mode=='edit')
 	}
 	var n = $('.sentence').length
 	$('#sentence')[0].max = n
@@ -139,10 +138,11 @@ function selection() {
 	}
 }
 
-function addNote(type) {
+function addNote(type,index) {
 		var s = selection()
 		var dad = s.anchorNode.parentElement
 		var guida = s.anchorNode.substringData(s.anchorOffset,20)
+
 		if (compatibleExtremes(s)) {
 			var spanId = 'span-'+ ($('span').length+1)
 			var pos = dad.childNodes.indexOf(s.anchorNode)
@@ -155,14 +155,17 @@ function addNote(type) {
 				start: Math.min(s.anchorOffset,s.focusOffset),
 				end: Math.max(s.anchorOffset,s.focusOffset)
 			}
-			notes.data.push(n)
+			notes[index].data.push(n)
 			insertNote(n,true)
+		}
+		else {
+			// gestire annotazioni per parti di testo alla cazzo
+			alert("Non puoi fare annotazioni per questo tipo di formattazione del testo")
 		}
 }
 
 function insertNote(note,active) {
 	var r = document.createRange()
-	alert(note.type)
 	var node = $('#'+note.node)[0].childNodes[note.pos]
 	r.setStart(node,note.start)
 	r.setEnd(node,note.end)
@@ -181,4 +184,3 @@ NodeList.prototype.indexOf = function(n) {
 	while (this.item(i) !== n) {i++} ; 
 	return i 
 }	
-

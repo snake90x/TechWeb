@@ -3,32 +3,37 @@
  */
  
 	$(document).ready(function(){
+
+
 		
 /* script implementazione dialog box*/
 	var dialog = $( "#dialog" ).dialog({
-	  autoOpen: false,
-	  modal: true,
-	  buttons: {
-		  Log: function() {
-		  document.getElementById('Annotator').disabled = 'disabled'; 
-		  var user = document.getElementById('username').value;
-		  if(user=="" || user=="Name"){
-			return alert("Username non valido")}
-		  modifica();
-		  
-		  $('span.welcomespan').each(function() {
-				$(this).append('<span>, '+user+'     <a href="#" onClick="cancellaCookie()">esci</a></span>');
-				scriviCookie(user);
-				alert(user);
-				leggiCookie(user);
-				
-		  });
-		  $( this ).dialog( "close" );  
+		autoOpen: false,
+		modal: true,
+		buttons: {
+			Log: function() { 
+				var user = document.getElementById('username').value;
+				if(user=="" || user=="Name"){
+					alert("Username non valido")
+				}
+				else{
+					document.getElementById('Annotator').disabled = 'disabled';
+					modifica();
+					$('span.welcomespan').each(function() {
+						$(this).append('<span>, '+user+'     <a href="#" onClick="cancellaCookie()">esci</a></span>');
+						scriviCookie(user);
+						alert(user);
+						leggiCookie(user);
+					});
+					$( this ).dialog( "close" ); 
+				} 
+			} 
 		},
-	  },
-	  close: function() {
-		form[ 0 ].reset();
-	  }
+
+		close: function() {
+			
+			form[ 0 ].reset();
+		}
 	});
 	
 /* script implementazione about box*/
@@ -44,13 +49,12 @@
 		}
 	});
 	
-/* script ricarica dialog se chiusa*/	
+// script ricarica dialog se chiusa	
 	var form = dialog.find( "form" ).submit(function( event ) {
-      modifica();
-      
-      dialog.dialog( "close" );
-      event.preventDefault();
+      		dialog.dialog( "close" );
+      		event.preventDefault();
     });
+
  
 /* implementazione di meta area come una tab JQuery*/
 	 var tabs = $( "#metaArea" ).tabs({
@@ -60,7 +64,7 @@
     }
 });
 	 var tabTemplate = "<li><a href='#{href}' data-toggle='tab' id='showEdit'>#{label}</a> </li>";
-	 function modifica(user) {
+	 function modifica() {
 				var title = "Modifica";
 				var id = "modifica",
 				li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
@@ -77,21 +81,38 @@
 					tabs.append( "<div id='" + id + "'>" + tabContentHtml + "</div>" );
 					tabs.tabs( "refresh" );
 					tabs.tabs( "option", "active", -1 );
-					$('#markSentence').click(function() {
-					
-					alert("click su frase")
-					addNote('sentence')
+
+				$('#markSentence').click(function() {
+					// recupero la tab corrente tramite href 
+					var idd,subs;
+					var active = $("#mainArea").tabs("option", "active");
+             		idd=$("#mainArea ul>li a").eq(active).attr('href');
+             		subs=idd.substring(6);
+             		console.log(idd);
+             		console.log(subs);
+					addNote('sentence',subs)
 				})
 				$('#markMain').click(function() {
-					alert("click su frase")
-					addNote('main')
+					// recupero la tab corrente tramite href 
+					var idd,subs;
+					var active = $("#mainArea").tabs("option", "active");
+             		idd=$("#mainArea ul>li a").eq(active).attr('href');
+             		subs=idd.substring(6);
+             		console.log(idd);
+             		console.log(subs);
+					addNote('main',subs)
 				})
 				$('#markSub').click(function() {
-					alert("click su frase");
-					addNote('sub')
+					// recupero la tab corrente tramite href 
+					var idd,subs;
+					var active = $("#mainArea").tabs("option", "active");
+             		idd=$("#mainArea ul>li a").eq(active).attr('href');
+             		subs=idd.substring(6);
+             		console.log(idd);
+             		console.log(subs);
+					addNote('sub',subs)
 				})
 				$('#save').click(function() {
-					alert("click su frase")
 					saveNotes()
 				})
 				}     
@@ -116,10 +137,41 @@
 			dialog.dialog( "open" );
 			
 		});
+
+
 	
-	
-	
-	
+		$('#dialog').keypress(function(e) {
+    		if (e.keyCode == $.ui.keyCode.ENTER) {
+          			
+
+
+    				
+				var user = document.getElementById('username').value;
+				if(user=="" || user=="Name"){
+					alert("Username non valido")
+				}
+				else{
+					document.getElementById('Annotator').disabled = 'disabled'; 
+					modifica();
+					$('span.welcomespan').each(function() {
+						$(this).append('<span>, '+user+'     <a href="#" onClick="cancellaCookie()">esci</a></span>');
+						scriviCookie(user);
+						alert(user);
+						leggiCookie(user);
+					});
+					$( this ).dialog( "close" );}
+
+
+
+
+
+
+    		}
+		});
+
+
+
+
 	});
  
  

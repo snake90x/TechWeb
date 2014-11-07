@@ -70,7 +70,7 @@
 						var url =  "annotaria-td/"+(".ui-selected", this).getAttribute("value");
 						addTab(url,index);
 						$( window ).load
-						(load(index));
+						load(index)
 					});
 				}
 			});

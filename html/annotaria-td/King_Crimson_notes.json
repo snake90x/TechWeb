@@ -1,5 +1,5 @@
 [
 	{"type":"main","id":"span-1","node":"p-01","pos":0,"guide":"I King Crimson sono ","start":0,"end":73},
-	{"type":"main","id":"span-2","node":"p-01","pos":2,"guide":"Spesso classificata ","start":2,"end":314},
-	{"type":"main","id":"span-3","node":"p-01","pos":4,"guide":"Per contro, i King C","start":2,"end":123}
+	{"type":"sub","id":"span-2","node":"p-01","pos":2,"guide":"Spesso classificata ","start":2,"end":314},
+	{"type":"sentence","id":"span-3","node":"p-01","pos":4,"guide":"Per contro, i King C","start":2,"end":123}
 ]
