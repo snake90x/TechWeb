@@ -1,4 +1,4 @@
-															/*docArea*/
+														/*docArea*/
 															
 															
 	$(function() {
@@ -49,6 +49,7 @@
 		
 		// close icon: chiude le tabs cliccando la x
 			tabs.delegate( "span.ui-icon-close", "click", function() {
+				//funzione dialog salva documento
 				var panelId = $( this ).closest( "li" ).remove().attr( "aria-controls" );
 				$( "#" + panelId ).remove();
 				tabs.tabs( "refresh" );

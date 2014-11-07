@@ -2,9 +2,11 @@
 
 // gestione dell'inserimento,salvataggio e visualizzazione delle annotazioni
 
-var notes = []; // struttura dati nota
+var filenotesSave = []; // filenotesSave struttura dati nota destinata al salvataggio, 
+var filenotesView = [];	// filenotesView struttura dati nota destinata al caricamento e alla visualizzazione client
+var pathnote = [];		// pathnote salva tutti i link ai file json in base agli indici di ogni documento 
 var mode = 'view' // modalità modifica o visualizza
-var pathnote=[]; // salva tutti i link ai file json in base agli indici di ogni documento 
+
 
 
 $(document).ready(main);
@@ -19,7 +21,8 @@ function main() {
 		//type:'json',
 		success: function(d) {
 			for (var i=0; i<d.length; i++) {
-				notes[i]= {};
+				filenotesView[i]= {};
+				filenotesSave[i]= {};
 				$('#selectable').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
 				pathnote[i]=d[i].notes;
 			}	
@@ -78,7 +81,8 @@ function main() {
 // carica i json delle note
 function load(index) {
    
-	notes[index].filename = pathnote[index]
+	filenotesView[index].filename = pathnote[index]
+	filenotesSave[index].filename=filenotesView[index].filename
 	$.ajax({
 		cache: false,
 		method: 'GET',
@@ -87,9 +91,10 @@ function load(index) {
 		success: function(d) {
 			
 			console.log("successo")
-			notes[index].data = d
-			for(var i=0; i< notes[index].data.length; i++){
-				console.log(notes[index].data[i].type)
+			filenotesView[index].data = d
+			filenotesSave[index].data=filenotesView[index].data
+			for(var i=0; i< filenotesView[index].data.length; i++){
+				console.log(filenotesView[index].data[i].type)
 			}
 			showNotes(index)
 		},
@@ -97,7 +102,8 @@ function load(index) {
 			
 			console.log("errore")
 			alert('Non ho potuto caricare le annotazioni per il file ')
-			notes[index].data = []
+			filenotesView[index].data = []
+			filenotesSave[index].data=filenotesView[index].data
 			showNotes(index)
 		}
 	});
@@ -106,11 +112,21 @@ function load(index) {
 
 }
 
-function saveNotes() {
+function saveNotes(index, type) { //index, indice di tab attiva; type, tipo di salvataggio: FALSE, salvo tutti i file modificati; TRUE, salvo solo il file attivo.
+	var url;
+	var string;
+	if (type) {
+		url = "save.php"
+		string=JSON.stringify(filenotesSave[index])
+	}else{
+		url = "saveAll.php"
+		string = JSON.stringify(filenotesSave)
+	}
+	console.log(string)
 	$.ajax({
 		method: 'POST',
-		url: "save.php",
-		data: JSON.stringify(notes),
+		url: url,
+		data: string,
 		success: function(d) {
 			alert("Note salvate")
 		},
@@ -121,8 +137,8 @@ function saveNotes() {
 }
 
 function showNotes(index) {
-	for (var i=0; i< notes[index].data.length; i++) {
-		insertNote(notes[index].data[i],mode=='edit')
+	for (var i=0; i< filenotesView[index].data.length; i++) {
+		insertNote(filenotesView[index].data[i],mode=='edit')
 	}
 	var n = $('.sentence').length
 	$('#sentence')[0].max = n
@@ -142,7 +158,6 @@ function addNote(type,index) {
 		var s = selection()
 		var dad = s.anchorNode.parentElement
 		var guida = s.anchorNode.substringData(s.anchorOffset,20)
-
 		if (compatibleExtremes(s)) {
 			var spanId = 'span-'+ ($('span').length+1)
 			var pos = dad.childNodes.indexOf(s.anchorNode)
@@ -155,7 +170,8 @@ function addNote(type,index) {
 				start: Math.min(s.anchorOffset,s.focusOffset),
 				end: Math.max(s.anchorOffset,s.focusOffset)
 			}
-			notes[index].data.push(n)
+			//filenotesView[index].data.push(n)
+			filenotesSave[index].data.push(n)
 			insertNote(n,true)
 		}
 		else {

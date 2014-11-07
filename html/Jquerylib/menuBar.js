@@ -68,7 +68,12 @@
 				var title = "Modifica";
 				var id = "modifica",
 				li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
-				tabContentHtml = "<button type='button' class='btn btn-warning' id='markSentence'>Frase</button><button type='button' class='btn btn-info' id='markMain'>Principale</button><button type='button' class='btn btn-success' id='markSub'>Subordinata</button></br><button type='button' class='btn btn-success' id='save'>Salva Nota</button>";
+				tabContentHtml = "<button type='button' class='btn btn-warning' id='markSentence'>Frase</button>"+
+								  "<button type='button' class='btn btn-info' id='markMain'>Principale</button>"+
+								  "<button type='button' class='btn btn-success' id='markSub'>Subordinata</button>"+
+								  "</br>"+
+								  "<button type='button' class='btn btn-success' id='save'>Salva Nota</button>"+
+								  "<button type='button' class='btn btn-warning' id='saveall'>Salva Tutto</button>";
 				var tabNameExists = false;
 				$('#metaArea ul li a').each(function(i) {
 					if (this.text == title) {
@@ -113,11 +118,15 @@
 					addNote('sub',subs)
 				})
 				$('#save').click(function() {
-					saveNotes()
+					var active = $("#mainArea").tabs("option", "active");
+             		idd=$("#mainArea ul>li a").eq(active).attr('href');
+             		subs=idd.substring(6);
+					saveNotes(subs,true)
+				})
+				$('#saveall').click(function() {
+					saveNotes(666,false)
 				})
 				}     
-				
-			  
 			}   
     
    
@@ -141,11 +150,7 @@
 
 	
 		$('#dialog').keypress(function(e) {
-    		if (e.keyCode == $.ui.keyCode.ENTER) {
-          			
-
-
-    				
+    		if (e.keyCode == $.ui.keyCode.ENTER) {   				
 				var user = document.getElementById('username').value;
 				if(user=="" || user=="Name"){
 					alert("Username non valido")
@@ -159,13 +164,8 @@
 						alert(user);
 						leggiCookie(user);
 					});
-					$( this ).dialog( "close" );}
-
-
-
-
-
-
+					$( this ).dialog( "close" );
+				}
     		}
 		});
 

@@ -1,5 +1,1 @@
-[
-	{"type":"main","id":"span-1","node":"p-01","pos":0,"guide":"I King Crimson sono ","start":0,"end":73},
-	{"type":"sub","id":"span-2","node":"p-01","pos":2,"guide":"Spesso classificata ","start":2,"end":314},
-	{"type":"sentence","id":"span-3","node":"p-01","pos":4,"guide":"Per contro, i King C","start":2,"end":123}
-]
+[{"type":"main","id":"span-1","node":"p-01","pos":0,"guide":"I King Crimson sono ","start":0,"end":73},{"type":"sub","id":"span-2","node":"p-01","pos":2,"guide":"Spesso classificata ","start":2,"end":314},{"type":"sentence","id":"span-3","node":"p-01","pos":4,"guide":"Per contro, i King C","start":2,"end":123},{"type":"sentence","id":"span-15","node":"p-03","pos":0,"guide":"La prima formazione ","start":0,"end":136},{"type":"main","id":"span-16","node":"p-03","pos":2,"guide":"registrati in quell'","start":124,"end":422},{"type":"sub","id":"span-17","node":"p-02","pos":0,"guide":"Anche se nati in Ing","start":0,"end":28},{"type":"sub","id":"span-18","node":"p-03","pos":4,"guide":"jazz fusion, almeno ","start":141,"end":152},{"type":"main","id":"span-19","node":"p-03","pos":6,"guide":"caratterizzato da un","start":231,"end":292}]
