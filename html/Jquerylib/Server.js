@@ -12,7 +12,7 @@ var mode = 'view' // modalità modifica o visualizza
 $(document).ready(main);
 
 function main() {
-	scriviCookie("");
+	scriviCookie("","");
 	
 	$.ajax({
 		 
@@ -23,7 +23,7 @@ function main() {
 			for (var i=0; i<d.length; i++) {
 				filenotesView[i]= {};
 				filenotesSave[i]= {};
-				$('#selectable').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
+				$('#doclist').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
 				pathnote[i]=d[i].notes;
 			}	
 		},
@@ -32,30 +32,6 @@ function main() {
 		}
 
 	});
-
-
-	// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
-	$('#main').click(function() {
-		if (this.checked) 
-			$('.main').addClass('text-primary')
-		else
-			$('.main').removeClass('text-primary')
-	})
-	$('#sub').click(function() {
-		if (this.checked) 
-			$('.sub').addClass('text-danger')
-		else
-			$('.sub').removeClass('text-danger')
-	})
-	$('#sentence').change(function() {
-		var v = this.value
-		var s = $('.sentence')
-		s.removeClass('bg-warning')
-		$(s[v-1]).addClass('bg-warning')
-	})
-
-
-	
 	
 }
 	/* se è aperta la tab edit passa alla modalità edit in cui sono visualizzate le classi css(per colorare), altrimenti passa alla 
@@ -158,6 +134,8 @@ function addNote(type,index) {
 		var s = selection()
 		var dad = s.anchorNode.parentElement
 		var guida = s.anchorNode.substringData(s.anchorOffset,20)
+		var author
+		var date
 		if (compatibleExtremes(s)) {
 			var spanId = 'span-'+ ($('span').length+1)
 			var pos = dad.childNodes.indexOf(s.anchorNode)
@@ -167,6 +145,8 @@ function addNote(type,index) {
 				node: dad.id,
 				pos: pos,
 				guide: guida,
+				author: author,
+				date: date,
 				start: Math.min(s.anchorOffset,s.focusOffset),
 				end: Math.max(s.anchorOffset,s.focusOffset)
 			}

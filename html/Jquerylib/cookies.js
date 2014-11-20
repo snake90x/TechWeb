@@ -1,27 +1,19 @@
 // FUNZIONI PER IL CONTROLLO DEI COOKIES USATI PER IL RICONOSCIMENTO TRAMITE USERNAME.	
+var logged;
 	
-	function scriviCookie(nomeCookie){
-		document.cookie="username="+nomeCookie;
+function scriviCookie(nomeCookie){
+	logged=nomeCookie;
+	document.cookie="username="+logged;
+}
+
+
+function leggiCookie(){
+	if (document.cookie.length > 0){
+		return logged;
 	}
+}
 
-
-	function leggiCookie(nomeCookie){
-		var userlogged;
-		if (document.cookie.length > 0){
-			userlogged=document.cookie;
-		}
-		return userlogged;
-	}
-
-
-	function cancellaCookie(){
-	  scriviCookie("");
-	  location.reload();
-	}
-
-
-	function verificaCookie(){
-	  document.cookie = 'verifica_cookie';
-	  var testcookie = (document.cookie.indexOf('verifica_cookie') != -1) ? true : false;
-	  return testcookie;
-	}
+function cancellaCookie(){
+  document.cookie="";
+  location.reload();
+}
