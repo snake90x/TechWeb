@@ -1,9 +1,11 @@
 // FUNZIONI PER IL CONTROLLO DEI COOKIES USATI PER IL RICONOSCIMENTO TRAMITE USERNAME.	
-var logged;
+var logged=[];
 	
-function scriviCookie(nomeCookie){
-	logged=nomeCookie;
-	document.cookie="username="+logged;
+function scriviCookie(nomeCookie,mail){
+	logged[0]=nomeCookie;
+	logged[1]=mail;
+	document.cookie="username="+logged[0];
+	document.cookie="mail="+logged[1];
 }
 
 

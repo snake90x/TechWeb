@@ -155,13 +155,9 @@
 	margin: 4px;
 }
 
-#ui-id-5{
+.ui-accordion-content{
 	height:70% !important;
 }
-#ui-id-7{
-	height:70% !important;
-}
-
 
 #doclist .ui-selecting { background: #9198AD; font-size: 10px;}
 #doclist .ui-selected { background: #5E6270; color: white; font-size: 10px;}
@@ -179,6 +175,15 @@
 #login label, #login input { display:block; }
 #login label { margin-top: 5px; }
 #login input { width: 95%; }
+
+.form_dialogs{
+	font-size:12px;
+}
+
+.immagine{
+	height: 25px;
+	width: 25px;
+}
 
 .border {
 	border: solid rgb(220,220,220) 1px;

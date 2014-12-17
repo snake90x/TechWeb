@@ -19,30 +19,6 @@
 			
 		});
 
-
-	
-		$('#login').keypress(function(e) {
-    		if (e.keyCode == $.ui.keyCode.ENTER) {   				
-				var name = document.getElementById('name').value;
-				var surname = document.getElementById('surname').value;
-				var email = document.getElementById('email').value;
-				if(name=="" ||surname=="" || email=="") {
-					alert("Nome non valido")
-				}
-				else{
-
-					document.getElementById('Annotator').disabled = 'disabled';
-					modifica();
-					$('span.welcomespan').each(function() {
-						$(this).append('<span>, '+name+' '+surname+'     <a href="#" onClick="cancellaCookie()">esci</a></span>');
-						scriviCookie(name+' '+surname);
-						alert(leggiCookie());
-					});
-					$( this ).dialog( "close" ); 
-				}
-    		}
-		});
-
 		// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
 		$('#main').click(function() {
 			if (this.checked) 

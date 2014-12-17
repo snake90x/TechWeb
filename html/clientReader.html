@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
+	<link rel="shortcut icon" href="otaria.png" type="image/png">
+	<link rel="icon" href="favicon.ico">
+	<meta charset="utf-8">
 	<title>AnnOtaria</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<link rel="stylesheet" href="Jquerylib/jquery-ui.css">
@@ -17,39 +19,95 @@
     <script src="Jquerylib/mainArea.js"></script>
     <script src="Jquerylib/docArea.js"></script>
     <script src="Jquerylib/cookies.js"></script>
+    <script src="Jquerylib/menu.js"></script>
     
    
 </head>
 
 <body>
 	
-		<div id="form_document" title="Annotazioni sul documento">
-			<form>
+		<div id="form_document" class="form_dialogs" title="Annotazioni sul documento">
+			<form id="formDoc">
 				<fieldset class="ui-helper-reset">
 					<label for="tab_title">Autore</label>
-					<select id="hasAuthor">
-						<option></option>
-						<option></option>
-						<option></option>
-						<option></option>
-					</select>
+					<select id="hasAuthor" onChange="addCategory(this.options[this.selectedIndex].text,this.id)">
+					</select><br>
 					<label for="tab_title">Editore</label>
-					<select id="hasPublisher">
-						<option></option>
-						<option></option>
-						<option></option>
-						<option></option>
-					</select>
+					<select id="hasPublisher" onChange="addCategory(this.options[this.selectedIndex].text,this.id)">
+					</select><br>
 					<label for="tab_title">Anno di pubblicazione</label>
 					<input type="number" name="PublicationYear" id="hasPublicationYear"required></br>
 					<label for="tab_title">Titolo</label>
 					<textarea name="Title" id="hasTitle" placeholder="Titolo" required></textarea></br>
 					<label for="tab_title">Abstract</label>
-					<textarea name="Abstract" id="Abstract" placeholder="Abstract" required></textarea></br>
+					<textarea name="Abstract" id="hasAbstract" placeholder="Abstract" required></textarea></br>
 					<label for="tab_title">Titoletto</label>
 					<input type="text" name="ShortTitle" id="hasShortTitle" placeholder="Titoletto" required>
 					<label for="tab_title">Commento</label>
 					<textarea name="Comment" id="hasComment" placeholder="Commento" required></textarea>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="form_denotes" class="form_dialogs" title="Annotazione entità">
+			<form id="formEnt">
+				<fieldset class="ui-helper-reset" id="field">
+					<label for="tab_title">Categoria</label>
+					<select onChange="GetLinguaggi(this.options[this.selectedIndex].text)" id="denotazione">
+					</select><br>
+					<label for="tab_title">Cosa?</label>
+					<select id="Info" onChange="newSubject(this.options[this.selectedIndex].text)"></select><br>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="form_hasSubject" class="form_dialogs" title="Seleziona un argomento">
+			<form id="formArg">
+				<fieldset class="ui-helper-reset">
+					<select id="subject" onChange="addCategory(this.options[this.selectedIndex].text,this.id)">
+					</select><br>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="form_relatesTo" class="form_dialogs" title="Aggiungere Risorsa DBpedia">
+			<form id="formDBp">
+				<fieldset class="ui-helper-reset">
+					<label for="tab_title">Inserire link</label><br>
+					<input type="text" name="Risorsa" id="linkDB" placeholder="link" required>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="form_quality" class="form_dialogs" title="Valuta il paragrafo">
+			<form id="formVal">
+				<fieldset class="ui-helper-reset">
+					<label for="tab_title">Chiarezza</label><br>
+					<input type="radio" name="Clarity" value="Very poor"required> Very poor
+					<input type="radio" name="Clarity" value="Poor"     required> Poor
+					<input type="radio" name="Clarity" value="Fair"     required> Fair
+					<input type="radio" name="Clarity" value="Good"     required> Good
+					<input type="radio" name="Clarity" value="Excelent" required> Excelent <br>
+					<label for="tab_title">Originalità</label><br>
+					<input type="radio" name="Originality" value="Very poor" required> Very poor
+					<input type="radio" name="Originality" value="Poor" required> Poor
+					<input type="radio" name="Originality" value="Fair" required> Fair
+					<input type="radio" name="Originality" value="Good" required> Good
+					<input type="radio" name="Originality" value="Excelent" required> Excelent <br>
+					<label for="tab_title">Presentazione</label><br>
+					<input type="radio" name="Formatting" value="Very poor" required> Very poor
+					<input type="radio" name="Formatting" value="Poor" required> Poor
+					<input type="radio" name="Formatting" value="Fair" required> Fair
+					<input type="radio" name="Formatting" value="Good" required> Good
+					<input type="radio" name="Formatting" value="Excelent" required> Excelent <br>
+				</fieldset>
+			</form>
+		</div>
+
+		<div id="form_hasComment" class="form_dialogs" title="Inserisci un commento">
+			<form id="formCom">
+				<fieldset class="ui-helper-reset">
+					<textarea name="Comment" id="frag_hasComment" placeholder="Commento" required></textarea>
 				</fieldset>
 			</form>
 		</div>
@@ -66,7 +124,6 @@
 			</fieldset>
 		</form>
 	</div>
- 
 	
 	<div id="project">
 		<label>Ann Otaria</label>
@@ -92,11 +149,11 @@
 			<div>
 				<ul id="doclist"></ul>	
 			</div>
-			<h3>Annotazioni sul documento</h3>
+			<h3 id="ann_title">Annotazioni sul documento</h3>
 			<div>
 				<ul id="docannotation">
 					<li class='ui-widget-content' id='document'>Documento</li> <!-- window da compilare, genera un annotazione complessa -->
-					<li class='ui-widget-content' id='denotes'>Persona/Luogo/Malattia</li> <!-- choice sul tipo di denotes tramite select che porterà a un select diverso, se la voce non è presente apre un input che aggiungerà la voce nella sezione corretta, genera l'annotazione semplice appropriata-->
+					<li class='ui-widget-content' id='denotes'>Annotazione entità</li> <!-- choice sul tipo di denotes tramite select che porterà a un select diverso, se la voce non è presente apre un input che aggiungerà la voce nella sezione corretta, genera l'annotazione semplice appropriata-->
 					<li class='ui-widget-content' id='hasSubject'>Argomento</li>
 					<li class='ui-widget-content' id='relatesTo'>DBPedia</li>
 					<li class='ui-widget-content' id='quality'>Valuta</li> <!-- apre un widget in cui vengono assegnati tre punteggi tramite un choice, genera un annotazione complessa -->

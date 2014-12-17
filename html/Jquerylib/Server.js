@@ -77,7 +77,7 @@ function load(index) {
 		error: function(a,b,c) {
 			
 			console.log("errore")
-			alert('Non ho potuto caricare le annotazioni per il file ')
+			alert('Non esistono annotazioni per questo articolo')
 			filenotesView[index].data = []
 			filenotesSave[index].data=filenotesView[index].data
 			showNotes(index)
