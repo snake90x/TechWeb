@@ -159,7 +159,11 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 			Conferma: function() {
-				var e = document.getElementById("subject").value;
+				var sub = document.getElementById("subject").value,
+				text=sub.options[voce.selectedIndex].text,
+				active = $("#mainArea").tabs("option", "active"),
+				index=$("#mainArea ul>li a").eq(active).attr('href'),
+				target=("#"+index).getAttribute("value");
  				$( this ).dialog( "close" );
 			} 
 		},

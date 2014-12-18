@@ -80,18 +80,62 @@ function SetLinguaggi(Linguaggi)
             linguaggioBox.options[linguaggioBox.options.length] = 
             new Option(result.data[Linguaggi][i], "denotesPlace");
           }
+          break;
   case "Persona":
           $(linguaggioBox).find('option').remove().end();
           for (var i=0; i<result.data[Linguaggi].length; i++) {
             linguaggioBox.options[linguaggioBox.options.length] = 
             new Option(result.data[Linguaggi][i], "denotesPerson");
           }
+          break;
   case "Malattia":
           $(linguaggioBox).find('option').remove().end();
           for (var i=0; i<result.data[Linguaggi].length; i++) {
             linguaggioBox.options[linguaggioBox.options.length] = 
             new Option(result.data[Linguaggi][i], "denotesDesease");
           }
+          break;
+  case "Altro...":
+          var input = document.createElement("input"),
+          select=document.getElementById("denotazione"),
+          select1=document.getElementById("Info"),
+          x = document.createElement("img"),
+          v = document.createElement("img");
+          x.src="images/icon_x.png";
+          x.alt="Annulla";
+          $(x).addClass("immagine");
+          v.src="images/v-icon.gif";
+          v.alt="Conferma";
+          $(v).addClass("immagine");
+          input.type = "text";
+          input.id = "new_cat"
+          input.placeholder = "nuova categoria";
+          $(input).insertAfter(select);
+          $(v).insertAfter(input);
+          $(x).insertAfter(v);
+          $(x).click(function(){
+            select.disabled = false;
+            input.parentNode.removeChild(input);
+            this.parentNode.removeChild(v);
+            this.parentNode.removeChild(this);
+          });
+          $(v).click(function(){
+            select.disabled = false;
+            InviaDati(input.value, 0);
+            input.parentNode.removeChild(input);
+            this.parentNode.removeChild(x);
+            this.parentNode.removeChild(this);
+          });
+          select.disabled = true;
+          $(select1).find('option').remove().end();
+          break;
+  default:
+          $(linguaggioBox).find('option').remove().end();
+              for (var i=0; i<result.data[Linguaggi].length; i++) {
+                linguaggioBox.options[linguaggioBox.options.length] = 
+                new Option(result.data[Linguaggi][i], result.data[Linguaggi][i]);
+              }
+          break;
   }
 }
 
@@ -122,40 +166,6 @@ function GetLinguaggi(Categoria)
     }
 
   });
-  if (Categoria=="Altro...") {
-    var input = document.createElement("input"),
-        select=document.getElementById("denotazione"),
-        select1=document.getElementById("Info"),
-        x = document.createElement("img"),
-        v = document.createElement("img");
-    x.src="images/icon_x.png";
-    x.alt="Annulla";
-    $(x).addClass("immagine");
-    v.src="images/v-icon.gif";
-    v.alt="Conferma";
-    $(v).addClass("immagine");
-    input.type = "text";
-    input.id = "new_cat"
-    input.placeholder = "nuova categoria";
-    $(input).insertAfter(select);
-    $(v).insertAfter(input);
-    $(x).insertAfter(v);
-    $(x).click(function(){
-      select.disabled = false;
-      input.parentNode.removeChild(input);
-      this.parentNode.removeChild(v);
-      this.parentNode.removeChild(this);
-    });
-    $(v).click(function(){
-      select.disabled = false;
-      InviaDati(input.value, 0);
-      input.parentNode.removeChild(input);
-      this.parentNode.removeChild(x);
-      this.parentNode.removeChild(this);
-    });
-    select.disabled = true;
-    $(select1).find('option').remove().end();
-  }
   SetLinguaggi(Categoria);
 }
 
@@ -181,11 +191,12 @@ function newSubject(Categoria)
       select.disabled = false;
       select1.disabled = false;
       input.parentNode.removeChild(input);
-      input.parentNode.removeChild(v);
+      this.parentNode.removeChild(v);
       this.parentNode.removeChild(this);
     });
     $(v).click(function(){
       select.disabled = false;
+      select1.disabled = false;
       InviaDati(input.value, 1);
       input.parentNode.removeChild(input);
       this.parentNode.removeChild(x);

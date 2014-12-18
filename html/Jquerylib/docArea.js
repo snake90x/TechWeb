@@ -117,11 +117,66 @@ function addCategory(Categoria, id)
     });
     $(v).click(function(){
       select.disabled = false;
-      InviaDati(input.value, 0);
+      InviaNuovaCategoria(input.value,id);
       input.parentNode.removeChild(input);
       this.parentNode.removeChild(x);
       this.parentNode.removeChild(this);
     });
     select.disabled = true;
   }
+}
+
+function InviaNuovaCategoria(value,id)
+{
+//modifica categorie e fa post
+	result.filename="categorie.json";
+	var autore=document.getElementById("hasAuthor"),
+		editore=document.getElementById("hasPublisher"),
+		sub=document.getElementById("subject");
+	switch(id){
+		case "hasAuthor":
+			var dim=result.data.hasAuthor.length;
+			result.data.hasAuthor[dim-1]=value;
+			result.data.hasAuthor[dim]="Altro...";
+			var string = JSON.stringify(result);
+			break;
+		case "hasPublisher":
+			var dim=result.data.hasPublisher.length;
+			result.data.hasPublisher[dim-1]=value;
+			result.data.hasPublisher[dim]="Altro...";
+			var string = JSON.stringify(result);
+			break;
+		case "subject":
+			var dim=result.data.subject.length;
+			result.data.subject[dim-1]=value;
+			result.data.subject[dim]="Altro...";
+			var string = JSON.stringify(result);
+			break;
+	}
+	$.ajax({
+	  method: 'POST',
+	  url: 'save.php',
+	  data: string,
+	  success: function(d) {
+	    alert("Categoria salvate")
+	    $(autore).find('option').remove().end();
+	    for (var i=0; i<result.data.hasAuthor.length; i++) {
+	        autore.options[autore.options.length] = 
+	        new Option(result.data.hasAuthor[i], result.data.hasAuthor[i]);
+	    }
+	    $(editore).find('option').remove().end();
+	    for (var i=0; i<result.data.hasPublisher.length; i++) {
+	        editore.options[editore.options.length] = 
+	        new Option(result.data.hasPublisher[i], result.data.hasPublisher[i]);
+	    }
+	    $(sub).find('option').remove().end();
+	    for (var i=0; i<result.data.subject.length; i++) {
+	        sub.options[sub.options.length] = 
+	        new Option(result.data.subject[i], result.data.subject[i]);
+	    }
+	  },
+	  error: function(a,b,c) {
+	    alert('Non ho potuto salvare la categoria')
+	  }
+	});
 }
