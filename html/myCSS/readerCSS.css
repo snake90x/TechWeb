@@ -225,3 +225,9 @@ background: #01579b;
 font-weight: bold;
 color: white;
 }
+
+.ui-widget-content {
+border: 1px solid #aaaaaa;
+background: #e1f5fe;
+color: black;
+}
