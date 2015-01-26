@@ -14,13 +14,15 @@ $(document).ready(function(){
 	//dialog annotazioni sul documento
 	$( "#form_document").dialog({
 		autoOpen: false,
+		resizable: false,
+		draggable: false,
 		modal: true,
 		buttons: {
 			Conferma: function() { 
 
 				 var active = $("#mainArea").tabs("option", "active"),
 				 index=$("#mainArea ul>li a").eq(active).attr('href'),
-				 target=("#"+index).getAttribute("value"),
+				 target=$(index).attr("value"),
 				 select=document.getElementById("hasAuthor"),
 				 select1=document.getElementById("hasPublisher"),
 				 a = select.value,
@@ -102,15 +104,26 @@ $(document).ready(function(){
  				$( this ).dialog( "close" );
 			} 
 		},
-
+		open: function() {
+		    $("#form_document").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
 		close: function() {
 
 			$("#formDoc")[ 0 ].reset();
 		}
 	});
 
+//Widget per le annotazioni sui frammenti
+
+//widget per le entità
 	$( "#form_denotes").dialog({
 		autoOpen: false,
+		resizable: false,
+		draggable: false,
 		modal: true,
 		buttons: {
 			Conferma: function() {
@@ -120,7 +133,7 @@ $(document).ready(function(){
 					text=voce.options[voce.selectedIndex].text,
 					active = $("#mainArea").tabs("option", "active"),
 					index=$("#mainArea ul>li a").eq(active).attr('href'),
-					target=("#"+index).getAttribute("value"),
+					target=$(index).attr("value"),
 					user = leggiCookie(),
 					annotation ={ 
 						 annotations:[
@@ -147,15 +160,23 @@ $(document).ready(function(){
  				$( this ).dialog( "close" );
 			} 
 		},
-
+		open: function() {
+		    $("#form_denotes").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
 		close: function() {
 
 			$(this).dialog( "close" );
 		}
 	});
-
+//widget per gli argomenti trattati
 	$( "#form_hasSubject").dialog({
 		autoOpen: false,
+		resizable: false,
+		draggable: false,
 		modal: true,
 		buttons: {
 			Conferma: function() {
@@ -163,64 +184,129 @@ $(document).ready(function(){
 				text=sub.options[voce.selectedIndex].text,
 				active = $("#mainArea").tabs("option", "active"),
 				index=$("#mainArea ul>li a").eq(active).attr('href'),
-				target=("#"+index).getAttribute("value");
+				target=$(index).attr("value");
  				$( this ).dialog( "close" );
 			} 
 		},
-
+		open: function() {
+		    $("#form_hasSubject").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
 		close: function() {
 
 			$("#formArg")[ 0 ].reset();
 		}
 	});
-
+//widget per i collegamenti DBPedia
 	$( "#form_relatesTo").dialog({
 		autoOpen: false,
+		resizable: false,
+		
+		draggable: false,resizable: false,
 		modal: true,
 		buttons: {
 			Conferma: function() { 
  				$( this ).dialog( "close" );
 			} 
 		},
-
+		open: function() {
+		    $("#form_relatesTo").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
 		close: function() {
 
 			$("#formDBp")[ 0 ].reset();
 		}
 	});
-
+//widget di valutazione della qualità
 	$( "#form_quality").dialog({
 		autoOpen: false,
+		resizable: false,
+		draggable: false,
 		modal: true,
 		buttons: {
 			Conferma: function() { 
  				$( this ).dialog( "close" );
 			} 
 		},
-
+		open: function() {
+		    $("#form_quality").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
 		close: function() {
 
 			$("#formVal")[ 0 ].reset();
 		}
 	});
-
+//widget per i commenti
 	$( "#form_hasComment").dialog({
 		autoOpen: false,
+		resizable: false,
+		draggable: false,
 		modal: true,
 		buttons: {
 			Conferma: function() { 
  				$( this ).dialog( "close" );
 			} 
 		},
+		open: function() {
+		    $("#form_hasComment").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
+		close: function() {
 
+			$("#formCom")[ 0 ].reset();
+		}
+	});
+//widget per le citazioni
+	$( "#form_cites").dialog({
+		autoOpen: false,
+		resizable: false,
+		draggable: false,
+		height:"auto",
+		width: "auto",	
+		modal: true,
+		 hide: { effect: "shake", duration: 600 ,times: 1},
+		buttons: {
+			Conferma: function() { 
+ 				$( this ).dialog( "close" );
+			} 
+		},
+		open: function() {
+		    $("#form_cites").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
 		close: function() {
 
 			$("#formCom")[ 0 ].reset();
 		}
 	});
 
+	console.log(list_docs)
+
+	$( "#auto_doc" ).autocomplete({
+      source: list_docs
+    });
+//finestra di login
 	$( "#login" ).dialog({
 		autoOpen: false,
+		resizable: false,
+		draggable: false,
 		modal: true,
 		buttons: {
 			Log: function() { 
@@ -244,39 +330,24 @@ $(document).ready(function(){
 				} 
 			} 
 		},
-
+		open: function() {
+		    $("#login").keypress(function(e) {
+		      if (e.keyCode == $.ui.keyCode.ENTER) {
+		        $(this).parent().find("button:eq(1)").trigger("click");
+		      }
+		    });
+  		},
 		close: function() {
 
 			$("#forLogin")[ 0 ].reset();
 		}
 	});
 
-	$('#login').keypress(function(e) {
-		if (e.keyCode == $.ui.keyCode.ENTER) {   				
-			var name = document.getElementById('name').value;
-			var surname = document.getElementById('surname').value;
-			var email = document.getElementById('email').value;
-			if(name=="" ||surname=="" || email=="") {
-				alert("Nome non valido")
-			}
-			else{
-
-				document.getElementById('Annotator').disabled = 'disabled';
-				modifica();
-				$('span.welcomespan').each(function() {
-					$(this).append('<span>, '+name+' '+surname+'     <a href="#" onClick="cancellaCookie()">esci</a></span>');
-					scriviCookie(name+' '+surname);
-					alert(leggiCookie());
-					$( "#docannotation" ).selectable( "option", "disabled", false);
-				});
-				$( this ).dialog( "close" ); 
-			}
-		}
-	});	
-
 	/* script implementazione about box*/
 	$( "#dialogo" ).dialog({
 		autoOpen: false,
+		resizable: false,
+		draggable: false,
 		show: {
 			effect: "blind",
 			duration: 1000

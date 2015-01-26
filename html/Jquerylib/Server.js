@@ -6,6 +6,7 @@ var filenotesSave = []; // filenotesSave struttura dati nota destinata al salvat
 var filenotesView = [];	// filenotesView struttura dati nota destinata al caricamento e alla visualizzazione client
 var pathnote = [];		// pathnote salva tutti i link ai file json in base agli indici di ogni documento 
 var mode = 'view' // modalità modifica o visualizza
+var list_docs = [];
 
 
 
@@ -25,7 +26,12 @@ function main() {
 				filenotesSave[i]= {};
 				$('#doclist').append("<li class='ui-widget-content' value='"+d[i].url+"'>"+d[i].label+"</li>")
 				pathnote[i]=d[i].notes;
-			}	
+				list_docs[i]=d[i].label;
+
+			}
+			$.getScript("Jquerylib/dialogs.js",function(){
+				alert("Caricato")
+			})
 		},
 		error: function(a,b,c) {
 			alert('Nessun documento da mostrare')

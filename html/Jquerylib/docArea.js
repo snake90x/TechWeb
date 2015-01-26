@@ -2,6 +2,7 @@
 
 $(function() {
 	var result ={};
+	var s = selection();
 
 	$( "#docArea" ).accordion({
 		heightStyle: "fill"
@@ -35,43 +36,56 @@ $(function() {
 			$( ".ui-selected", this ).each(function() {
 				//ogni elemento della lista aprirà la dialog corrispondente al tipo di annotazione
 				//eseguire la get una sola volta facendogli ritornare il result.
-				var type=(".ui-selected", this).getAttribute("id");
-				switch(type) {
-					    case "document":
-					    		var autori=document.getElementById("hasAuthor"),
-									publisher=document.getElementById("hasPublisher");
-					    		if(autori.options.length == 0 || publisher.options.length==0){
-									for (var i=0; i<result.hasAuthor.length; i++) {
-										autori.options[autori.options.length] = 
-										new Option(result.hasAuthor[i], result.hasAuthor[i]);
+				//console.log(s.anchorNode.parentElement);
+				active = $("#mainArea").tabs("option", "active")
+				console.log(active)
+				index=$("#mainArea ul>li a").eq(active).attr('href');
+				doc_label=$("#mainArea ul>li a").eq(active).html();
+				console.log(doc_label)
+				if(index!=undefined) {
+					var type=(".ui-selected", this).getAttribute("id");
+					switch(type) {
+						    case "document":
+						    		var autori=document.getElementById("hasAuthor"),
+										publisher=document.getElementById("hasPublisher");
+						    		if(autori.options.length == 0 || publisher.options.length==0){
+										for (var i=0; i<result.hasAuthor.length; i++) {
+											autori.options[autori.options.length] = 
+											new Option(result.hasAuthor[i], result.hasAuthor[i]);
+										}
+										for (var i=0; i<result.hasPublisher.length; i++) {
+											publisher.options[publisher.options.length] = 
+											new Option(result.hasPublisher[i], result.hasPublisher[i]);
+										}
 									}
-									for (var i=0; i<result.hasPublisher.length; i++) {
-										publisher.options[publisher.options.length] = 
-										new Option(result.hasPublisher[i], result.hasPublisher[i]);
+						        break;
+						    case "denotes":
+						    		var categoria=document.getElementById("denotazione");
+						    		if (denotazione.options.length==0) {
+										for (var i=0; i<result.denotazione.length; i++) {
+											categoria.options[categoria.options.length] = 
+											new Option(result.denotazione[i], result.denotazione[i]);
+										}
 									}
-								}
-					        break;
-					    case "denotes":
-					    		var categoria=document.getElementById("denotazione");
-					    		if (denotazione.options.length==0) {
-									for (var i=0; i<result.denotazione.length; i++) {
-										categoria.options[categoria.options.length] = 
-										new Option(result.denotazione[i], result.denotazione[i]);
-									}
-								}
-					        break;
-					    case "hasSubject":
+						        break;
+						    case "hasSubject":
 
-					    		var sub=document.getElementById("subject");
-					    		if (sub.options.length==0) {
-									for (var i=0; i<result.subject.length; i++) {
-										sub.options[sub.options.length] = 
-										new Option(result.subject[i], result.subject[i]);
+						    		var sub=document.getElementById("subject");
+						    		if (sub.options.length==0) {
+										for (var i=0; i<result.subject.length; i++) {
+											sub.options[sub.options.length] = 
+											new Option(result.subject[i], result.subject[i]);
+										}
 									}
-								}
-					    	break;
-					}
-				$( "#form_"+type ).dialog( "open" );
+								break;
+							case "cites":
+									$("#active_doc").html(doc_label);
+						    	break;
+						}
+					$( "#form_"+type ).dialog( "open" );
+				}else{
+					alert("Devi aprire almeno un documento")
+				};
 			});
 		},
 		disabled:true

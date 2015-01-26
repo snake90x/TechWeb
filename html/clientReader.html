@@ -15,20 +15,15 @@
     <script src="Jquerylib/Server.js"></script>
     <script src="Jquerylib/menuBar.js"></script>
     <script src="Jquerylib/metaArea.js"></script>
-    <script src="Jquerylib/dialogs.js"></script>
     <script src="Jquerylib/mainArea.js"></script>
     <script src="Jquerylib/docArea.js"></script>
     <script src="Jquerylib/cookies.js"></script>
     <script src="Jquerylib/menu.js"></script>
-    
-   
 </head>
-
 <body class="yo">
 	<div id="project">
 		<label>Ann Otaria</label>
 	</div>
-	
 		<div id="form_document" class="form_dialogs" title="Annotazioni sul documento">
 			<form id="formDoc">
 				<fieldset class="ui-helper-reset">
@@ -51,7 +46,6 @@
 				</fieldset>
 			</form>
 		</div>
-
 		<div id="form_denotes" class="form_dialogs" title="Annotazione entità">
 			<form id="formEnt">
 				<fieldset class="ui-helper-reset" id="field">
@@ -63,7 +57,6 @@
 				</fieldset>
 			</form>
 		</div>
-
 		<div id="form_hasSubject" class="form_dialogs" title="Seleziona un argomento">
 			<form id="formArg">
 				<fieldset class="ui-helper-reset">
@@ -72,7 +65,6 @@
 				</fieldset>
 			</form>
 		</div>
-
 		<div id="form_relatesTo" class="form_dialogs" title="Aggiungere Risorsa DBpedia">
 			<form id="formDBp">
 				<fieldset class="ui-helper-reset">
@@ -81,7 +73,6 @@
 				</fieldset>
 			</form>
 		</div>
-
 		<div id="form_quality" class="form_dialogs" title="Valuta il paragrafo">
 			<form id="formVal">
 				<fieldset class="ui-helper-reset">
@@ -106,7 +97,14 @@
 				</fieldset>
 			</form>
 		</div>
-
+		<div id="form_cites" class="form_dialogs" title="Inserisci una citazione">
+			<form id="formCit">
+				<fieldset class="ui-helper-reset">
+					<label>Documento contenente la citazione:</label><br><span id="active_doc"></span><br><br>
+					<input id="auto_doc" placeholder="documento citato">
+				</fieldset>
+			</form>
+		</div>
 		<div id="form_hasComment" class="form_dialogs" title="Inserisci un commento">
 			<form id="formCom">
 				<fieldset class="ui-helper-reset">
@@ -114,7 +112,6 @@
 				</fieldset>
 			</form>
 		</div>
-
 		<div id="login" title="Login">
 		<form id="forLogin">
 			<fieldset class="ui-helper-reset">
@@ -127,22 +124,15 @@
 			</fieldset>
 		</form>
 	</div>
-	
-	
- 
 	<div id="menuBar">
 		<span class="welcomespan"> Benvenuto</span>
 		<button id = "Annotator"> Annotator </button>
 		<button id = "About"> About </button>
 		<button id = "Help"> Help </button>
 	</div>
-	
-	
 	<div id="dialogo" title="About">
 		<h5>Progetto Di Tecnologie Web 2014/2015 <br> Francesco Negretti <br>Emanuele Pagliara <br>Giovanni Ricucci <br>Giulio Guaraldi</h5>
 	</div>
-	
-	
 	<div id="leftpanel">
 		<div id="docArea">
 			<h3>Document List</h3>
@@ -182,11 +172,8 @@
 			</div>
 		</div>		
 	</div>
-	
-	
 	<div id="mainArea">
 		<ul class="addtab">
-		<!-- <li><a href="#tabs-1">Adv_Virol_2012_Apr_2_2012_803535.html</a> <span class="ui-icon ui-icon-close" role="presentation">Remove Tab</span></li> -->
 		</ul>
 	</div>
     

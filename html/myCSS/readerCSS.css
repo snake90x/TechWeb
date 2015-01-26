@@ -231,3 +231,20 @@ border: 1px solid #aaaaaa;
 background: #e1f5fe;
 color: black;
 }
+
+.ui-autocomplete {
+		max-height: 100px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		background: white;
+		
+	}
+.ui-menu-item {
+	font-size: 12px;
+}
+
+#active_doc{
+	text-align: justify;
+	font-style: italic;
+}
