@@ -96,7 +96,7 @@ $(document).ready(function(){
 					 		name:user[0],
 					 		email:user[1]
 					 	},
-					 	time:time
+					 	//time:time
 					 }
 				}
 
@@ -127,9 +127,10 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 			Conferma: function() {
-
 				var voce=document.getElementById("Info"),
-					type=voce.value;
+					nota=document.getElementById("denotazione"),
+					label=nota.options[nota.selectedIndex].text
+					type=voce.value,
 					text=voce.options[voce.selectedIndex].text,
 					active = $("#mainArea").tabs("option", "active"),
 					index=$("#mainArea ul>li a").eq(active).attr('href'),
@@ -141,7 +142,7 @@ $(document).ready(function(){
 								type:type,
 								label:"Entità",
 								body:{
-									label:type,
+									label:label,
 									predicate:text
 								}
 							}
@@ -154,9 +155,10 @@ $(document).ready(function(){
 						 		name:user[0],
 						 		email:user[1]
 						 	},
-						 	time:time
+						 	//time:time
 						 }
-					}				
+					}	
+				addAnnotation(annotation);		
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -180,11 +182,36 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 			Conferma: function() {
-				var sub = document.getElementById("subject").value,
-				text=sub.options[voce.selectedIndex].text,
+				var sub = document.getElementById("subject"),
+				type=sub.options[sub.selectedIndex].value,
+				text=sub.options[sub.selectedIndex].text,
 				active = $("#mainArea").tabs("option", "active"),
 				index=$("#mainArea ul>li a").eq(active).attr('href'),
-				target=$(index).attr("value");
+				target=$(index).attr("value"),
+				user = leggiCookie(),
+				annotation ={ 
+						 annotations:[
+							{
+								type:type,
+								label:"Soggetto",
+								body:{
+									label:"La selezione tratta:",
+									predicate:text
+								}
+							}
+						 ],
+						 target:{
+						 	source:target
+						 },
+						 provenance:{
+						 	author:{
+						 		name:user[0],
+						 		email:user[1]
+						 	},
+						 	//time:time
+						 }
+					};
+				console.log(type,text)
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -204,11 +231,40 @@ $(document).ready(function(){
 	$( "#form_relatesTo").dialog({
 		autoOpen: false,
 		resizable: false,
-		
 		draggable: false,resizable: false,
 		modal: true,
 		buttons: {
 			Conferma: function() { 
+				var db= document.getElementById("linkDB"),
+				type=db.getAttribute("name"),
+				text=db.value,
+				active = $("#mainArea").tabs("option", "active"),
+				index=$("#mainArea ul>li a").eq(active).attr('href'),
+				target=$(index).attr("value"),
+				user = leggiCookie(),
+				annotation ={ 
+						 annotations:[
+							{
+								type:type,
+								label:"DBPedia",
+								body:{
+									label:"Collegamento DBPedia:",
+									predicate:text
+								}
+							}
+						 ],
+						 target:{
+						 	source:target
+						 },
+						 provenance:{
+						 	author:{
+						 		name:user[0],
+						 		email:user[1]
+						 	},
+						 	//time:time
+						 }
+					};
+				console.log(type,text);
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -232,7 +288,53 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 			Conferma: function() { 
+				var chiarezza = $('input[name="hasClarityScore"]:checked').val(),
+					originalita = $('input[name="hasOriginalityScore"]:checked').val(),
+					presentazione = $('input[name="hasFormattingScore"]:checked').val(),
+					active = $("#mainArea").tabs("option", "active"),
+					index=$("#mainArea ul>li a").eq(active).attr('href'),
+					target=$(index).attr("value"),
+					user = leggiCookie(),
+					annotation ={ 
+						 annotations:[
+							{
+								type:"hasClarityScore",
+								label:"Chiarezza",
+								body:{
+									label:"Valutato:",
+									predicate:chiarezza
+								}
+							},
+							{
+								type:"hasOriginalityScore",
+								label:"Originalità",
+								body:{
+									label:"Valutato:",
+									predicate:originalita
+								}
+							},
+							{
+								type:"hasFormattingScore",
+								label:"Presentazione",
+								body:{
+									label:"Valutato:",
+									predicate:presentazione
+								}
+							}
+						 ],
+						 target:{
+						 	source:target
+						 },
+						 provenance:{
+						 	author:{
+						 		name:user[0],
+						 		email:user[1]
+						 	},
+						 	//time:time
+						 }
+					};
  				$( this ).dialog( "close" );
+ 				console.log(chiarezza,originalita,presentazione);
 			} 
 		},
 		open: function() {
@@ -255,6 +357,34 @@ $(document).ready(function(){
 		modal: true,
 		buttons: {
 			Conferma: function() { 
+				var text = document.getElementById("frag_hasComment").value,
+				active = $("#mainArea").tabs("option", "active"),
+				index=$("#mainArea ul>li a").eq(active).attr('href'),
+				target=$(index).attr("value"),
+				user = leggiCookie(),
+				annotation ={ 
+						 annotations:[
+							{
+								type:"frag_hasComment",
+								label:"Commento:",
+								body:{
+									label:"Il tuo commento:",
+									predicate:text
+								}
+							}
+						 ],
+						 target:{
+						 	source:target
+						 },
+						 provenance:{
+						 	author:{
+						 		name:user[0],
+						 		email:user[1]
+						 	},
+						 	//time:time
+						 }
+					};
+				console.log(text);
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -281,6 +411,34 @@ $(document).ready(function(){
 		 hide: { effect: "shake", duration: 600 ,times: 1},
 		buttons: {
 			Conferma: function() { 
+				var text = document.getElementById("auto_doc").value,
+				active = $("#mainArea").tabs("option", "active"),
+				index=$("#mainArea ul>li a").eq(active).attr('href'),
+				target=$(index).attr("value"),
+				user = leggiCookie(),
+				annotation ={ 
+						 annotations:[
+							{
+								type:"cites",
+								label:"Citazione",
+								body:{
+									label:"Articolo citato:",
+									predicate:text
+								}
+							}
+						 ],
+						 target:{
+						 	source:target
+						 },
+						 provenance:{
+						 	author:{
+						 		name:user[0],
+						 		email:user[1]
+						 	},
+						 	//time:time
+						 }
+					};
+				console.log(text);
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -297,7 +455,7 @@ $(document).ready(function(){
 		}
 	});
 
-	console.log(list_docs)
+	//console.log(list_docs)
 
 	$( "#auto_doc" ).autocomplete({
       source: list_docs

@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="jats-preview.css" id="s864k6757">
 	<link rel="stylesheet" type="text/css" href="myCSS/bootstrap.min.css"/>
 	<link rel="stylesheet" type="text/css" href="myCSS/readerCSS.css"/>	
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<script src="Jquerylib/jquery-1.10.2.js"></script>
     <script src="Jquerylib/jquery-ui.js"></script>
     <script src="Jquerylib/Server.js"></script>
@@ -40,7 +41,7 @@
 					<label for="tab_title">Abstract</label>
 					<textarea name="Abstract" id="hasAbstract" placeholder="Abstract" required></textarea></br>
 					<label for="tab_title">Titoletto</label>
-					<input type="text" name="ShortTitle" id="hasShortTitle" placeholder="Titoletto" required>
+					<input type="text" name="ShortTitle" id="hasShortTitle" placeholder="Titoletto" maxlength="80" required>
 					<label for="tab_title">Commento</label>
 					<textarea name="Comment" id="hasComment" placeholder="Commento" required></textarea>
 				</fieldset>
@@ -60,7 +61,7 @@
 		<div id="form_hasSubject" class="form_dialogs" title="Seleziona un argomento">
 			<form id="formArg">
 				<fieldset class="ui-helper-reset">
-					<select id="subject" onChange="addCategory(this.options[this.selectedIndex].text,this.id)">
+					<select id="subject" value="hasSubject" onChange="addCategory(this.options[this.selectedIndex].text,this.id)">
 					</select><br>
 				</fieldset>
 			</form>
@@ -69,7 +70,7 @@
 			<form id="formDBp">
 				<fieldset class="ui-helper-reset">
 					<label for="tab_title">Inserire link</label><br>
-					<input type="text" name="Risorsa" id="linkDB" placeholder="link" required>
+					<input type="text" name="relatesTo" id="linkDB" placeholder="link" required>
 				</fieldset>
 			</form>
 		</div>
@@ -77,23 +78,23 @@
 			<form id="formVal">
 				<fieldset class="ui-helper-reset">
 					<label for="tab_title">Chiarezza</label><br>
-					<input type="radio" name="Clarity" value="Very poor"required> Very poor
-					<input type="radio" name="Clarity" value="Poor"     required> Poor
-					<input type="radio" name="Clarity" value="Fair"     required> Fair
-					<input type="radio" name="Clarity" value="Good"     required> Good
-					<input type="radio" name="Clarity" value="Excelent" required> Excelent <br>
+					<input type="radio" name="hasClarityScore" value="Very poor"required> Very poor
+					<input type="radio" name="hasClarityScore" value="Poor"     required> Poor
+					<input type="radio" name="hasClarityScore" value="Fair"     required> Fair
+					<input type="radio" name="hasClarityScore" value="Good"     required> Good
+					<input type="radio" name="hasClarityScore" value="Excelent" required> Excelent <br>
 					<label for="tab_title">Originalità</label><br>
-					<input type="radio" name="Originality" value="Very poor" required> Very poor
-					<input type="radio" name="Originality" value="Poor" required> Poor
-					<input type="radio" name="Originality" value="Fair" required> Fair
-					<input type="radio" name="Originality" value="Good" required> Good
-					<input type="radio" name="Originality" value="Excelent" required> Excelent <br>
+					<input type="radio" name="hasOriginalityScore" value="Very poor" required> Very poor
+					<input type="radio" name="hasOriginalityScore" value="Poor" required> Poor
+					<input type="radio" name="hasOriginalityScore" value="Fair" required> Fair
+					<input type="radio" name="hasOriginalityScore" value="Good" required> Good
+					<input type="radio" name="hasOriginalityScore" value="Excelent" required> Excelent <br>
 					<label for="tab_title">Presentazione</label><br>
-					<input type="radio" name="Formatting" value="Very poor" required> Very poor
-					<input type="radio" name="Formatting" value="Poor" required> Poor
-					<input type="radio" name="Formatting" value="Fair" required> Fair
-					<input type="radio" name="Formatting" value="Good" required> Good
-					<input type="radio" name="Formatting" value="Excelent" required> Excelent <br>
+					<input type="radio" name="hasFormattingScore" value="Very poor" required> Very poor
+					<input type="radio" name="hasFormattingScore" value="Poor" required> Poor
+					<input type="radio" name="hasFormattingScore" value="Fair" required> Fair
+					<input type="radio" name="hasFormattingScore" value="Good" required> Good
+					<input type="radio" name="hasFormattingScore" value="Excelent" required> Excelent <br>
 				</fieldset>
 			</form>
 		</div>
@@ -101,14 +102,14 @@
 			<form id="formCit">
 				<fieldset class="ui-helper-reset">
 					<label>Documento contenente la citazione:</label><br><span id="active_doc"></span><br><br>
-					<input id="auto_doc" placeholder="documento citato">
+					<input id="auto_doc" name="cites" placeholder="documento citato">
 				</fieldset>
 			</form>
 		</div>
 		<div id="form_hasComment" class="form_dialogs" title="Inserisci un commento">
 			<form id="formCom">
 				<fieldset class="ui-helper-reset">
-					<textarea name="Comment" id="frag_hasComment" placeholder="Commento" required></textarea>
+					<textarea name="frag_hasComment" id="frag_hasComment" placeholder="Commento (Max 120 Caratteri)" maxlength="120" required></textarea>
 				</fieldset>
 			</form>
 		</div>

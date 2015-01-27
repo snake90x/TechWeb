@@ -51,11 +51,11 @@ $(function() {
 						    		if(autori.options.length == 0 || publisher.options.length==0){
 										for (var i=0; i<result.hasAuthor.length; i++) {
 											autori.options[autori.options.length] = 
-											new Option(result.hasAuthor[i], result.hasAuthor[i]);
+											new Option(result.hasAuthor[i],"hasAuthor");
 										}
 										for (var i=0; i<result.hasPublisher.length; i++) {
 											publisher.options[publisher.options.length] = 
-											new Option(result.hasPublisher[i], result.hasPublisher[i]);
+											new Option(result.hasPublisher[i],"hasPublisher");
 										}
 									}
 						        break;
@@ -74,7 +74,7 @@ $(function() {
 						    		if (sub.options.length==0) {
 										for (var i=0; i<result.subject.length; i++) {
 											sub.options[sub.options.length] = 
-											new Option(result.subject[i], result.subject[i]);
+											new Option(result.subject[i], "hasSubject");
 										}
 									}
 								break;
@@ -176,17 +176,17 @@ function InviaNuovaCategoria(value,id)
 	    $(autore).find('option').remove().end();
 	    for (var i=0; i<result.data.hasAuthor.length; i++) {
 	        autore.options[autore.options.length] = 
-	        new Option(result.data.hasAuthor[i], result.data.hasAuthor[i]);
+	        new Option(result.data.hasAuthor[i],"hasAuthor");
 	    }
 	    $(editore).find('option').remove().end();
 	    for (var i=0; i<result.data.hasPublisher.length; i++) {
 	        editore.options[editore.options.length] = 
-	        new Option(result.data.hasPublisher[i], result.data.hasPublisher[i]);
+	        new Option(result.data.hasPublisher[i],"hasPublisher");
 	    }
 	    $(sub).find('option').remove().end();
 	    for (var i=0; i<result.data.subject.length; i++) {
 	        sub.options[sub.options.length] = 
-	        new Option(result.data.subject[i], result.data.subject[i]);
+	        new Option(result.data.subject[i],"hasSubject");
 	    }
 	  },
 	  error: function(a,b,c) {

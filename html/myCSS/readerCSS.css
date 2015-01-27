@@ -238,8 +238,11 @@ color: black;
 		/* prevent horizontal scrollbar */
 		overflow-x: hidden;
 		background: white;
-		
 	}
+#auto_doc{
+	width:100%;
+	height:auto;
+}
 .ui-menu-item {
 	font-size: 12px;
 }
@@ -248,3 +251,14 @@ color: black;
 	text-align: justify;
 	font-style: italic;
 }
+
+#metadiv1{
+	height:150px;
+	overflow: auto;
+}
+
+#metadiv2{
+	position: absolute;
+	bottom:0px;
+}
+
