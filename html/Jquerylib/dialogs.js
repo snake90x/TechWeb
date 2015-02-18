@@ -99,8 +99,7 @@ $(document).ready(function(){
 					 	//time:time
 					 }
 				}
-
-
+				$(addAnnotation(annotation));
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -158,7 +157,7 @@ $(document).ready(function(){
 						 	//time:time
 						 }
 					}	
-				addAnnotation(annotation);		
+				$(addAnnotation(annotation));
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -212,6 +211,7 @@ $(document).ready(function(){
 						 }
 					};
 				console.log(type,text)
+				$(addAnnotation(annotation));
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -265,6 +265,7 @@ $(document).ready(function(){
 						 }
 					};
 				console.log(type,text);
+				$(addAnnotation(annotation));
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -333,6 +334,7 @@ $(document).ready(function(){
 						 	//time:time
 						 }
 					};
+				$(addAnnotation(annotation));
  				$( this ).dialog( "close" );
  				console.log(chiarezza,originalita,presentazione);
 			} 
@@ -385,6 +387,7 @@ $(document).ready(function(){
 						 }
 					};
 				console.log(text);
+				$(addAnnotation(annotation));
  				$( this ).dialog( "close" );
 			} 
 		},
@@ -438,6 +441,7 @@ $(document).ready(function(){
 						 	//time:time
 						 }
 					};
+				$(addAnnotation(annotation));
 				console.log(text);
  				$( this ).dialog( "close" );
 			} 

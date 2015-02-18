@@ -14,9 +14,6 @@ function modifica() {
 	var id = "modifica",
 	li = $( tabTemplate.replace( /#\{href\}/g, "#" + id ).replace( /#\{label\}/g, title ) ),
 	tabContentHtml = "<div id='metadiv1'><ul id='docTempAnnotation'></ul></div>"+
-					  "<div id='metadiv2'><button type='button' class='btn btn-warning' id='markSentence'>Frase</button>"+
-					  "<button type='button' class='btn btn-info' id='markMain'>Principale</button>"+
-					  "<button type='button' class='btn btn-success' id='markSub'>Subordinata</button>"+
 					  "</br>"+
 					  "<button type='button' class='btn btn-success' id='save'>Salva Nota</button>"+
 					  "<button type='button' class='btn btn-warning' id='saveall'>Salva Tutto</button></div>";
@@ -76,15 +73,20 @@ function modifica() {
 }
 
 function addAnnotation (annotation){
-	var active = $("#mainArea").tabs("option", "active"),
+	var annotation=annotation,
+	active = $("#mainArea").tabs("option", "active"),
 	title=$("#mainArea ul>li a").eq(active).html(),
-	annotationTemplate = "<li id='#{IdAnnotationCount}'>"+
+	idd=$("#mainArea ul>li a").eq(active).attr('href'),
+    subs=idd.substring(6),   //indice tab attiva che corrisponde anche all'indice della struttura fileNotesSave relativa a quello specifico articolo
+	ifdoc=annotation.annotations[0].type,
+	annotationTemplate = "<li id='#{IdAnnotationCount}' class='"+subs+"'>"+
 								"<span class='type'> #{type}</span>"+
 								"</br><span class='annlabel'> #{label}</span>"+
 								"</br><span class='doc'>#{doc}</span></br>"+
-								"<a href='#'><i class='fa fa-floppy-o fa-2x'></i></a>"+"   "+"<a href='#'><i class='fa fa-cog fa-spin fa-2x'></i></a>"+"   "+"<a onclick='deletezzz(this.parentNode)'><i class='fa fa-times fa-2x'></i></a></li>",
+								"<a href='#'><i class='fa fa-floppy-o fa-2x'></i></a>"+"   "+
+								"<a href='#'><i class='fa fa-cog fa-spin fa-2x'></i></a>"+"   "+
+								"<a onclick='deletezzz(this.parentNode)'><i class='fa fa-times fa-2x'></i></a></li>",
 	type=annotation.annotations[0].body.label,
-	ifdoc=annotation.annotations[0].type,
 	label=annotation.annotations[0].label,
 	target=title;
 	console.log(title);
