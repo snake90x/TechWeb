@@ -131,6 +131,11 @@ text-shadow:0px 0px 0 rgb(237,237,237),1px 1px 0 rgb(229,229,229), 2px 2px 0 rgb
 	font-size:13px;
 }
 
+.error{
+	color: red;
+	font-weight: bold;
+}
+
 #leftpanel{
 	float: left;
 	width: 25%;
@@ -206,7 +211,7 @@ text-shadow:0px 0px 0 rgb(237,237,237),1px 1px 0 rgb(229,229,229), 2px 2px 0 rgb
 	padding: 2px;
 	border: dotted #d58512; 3px;			
 }
-.edit-main {
+.edit-denotesPlace {
 	background-color: #7be0fe;	
 	color: white;		
 }

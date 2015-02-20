@@ -1,6 +1,7 @@
 /*docArea*/
 
 $(function() {
+	var year = new Date().getFullYear();
 	var result ={};
 	var s = selection();
 
@@ -48,6 +49,9 @@ $(function() {
 						    case "document":
 						    		var autori=document.getElementById("hasAuthor"),
 										publisher=document.getElementById("hasPublisher");
+									$("#hasPublicationYear").attr({
+									       "max" : year
+									    });
 						    		if(autori.options.length == 0 || publisher.options.length==0){
 										for (var i=0; i<result.hasAuthor.length; i++) {
 											autori.options[autori.options.length] = 
@@ -82,6 +86,7 @@ $(function() {
 									$("#active_doc").html(doc_label);
 						    	break;
 						}
+					
 					$( "#form_"+type ).dialog( "open" );
 				}else{
 					alert("Devi aprire almeno un documento")

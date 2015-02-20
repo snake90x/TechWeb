@@ -20,11 +20,11 @@
 		});
 
 		// controllo checkbox principali e bottoni,secondarie e form se sono "cecked" allora assegnano il css
-		$('#main').click(function() {
+		$('#place').click(function() {
 			if (this.checked) 
-				$('.main').addClass('text-primary')
+				$('.denotesPlace').addClass('text-primary')
 			else
-				$('.main').removeClass('text-primary')
+				$('.denotesPlace').removeClass('text-primary')
 		})
 		$('#sub').click(function() {
 			if (this.checked) 

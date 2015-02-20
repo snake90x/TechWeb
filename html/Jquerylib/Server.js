@@ -47,13 +47,13 @@ function main() {
 			alert("siamo in edit")
 			mode = 'edit'
 			$('.sentence').addClass('edit-sentence')
-			$('.main').addClass('edit-main')
+			$('.denotesPlace').addClass('edit-denotesPlace')
 			$('.sub').addClass('edit-sub')
 		}else{
 			alert("siamo in annotazioni")
 			mode = 'view'
 			$('.sentence').removeClass('edit-sentence')
-			$('.main').removeClass('edit-main')
+			$('.denotesPlace').removeClass('edit-denotesPlace')
 			$('.sub').removeClass('edit-sub')
 		}
 	};		
@@ -136,45 +136,44 @@ function selection() {
 	}
 }
 
-function addNote(type,index) {
-		var s = selection()
-		var dad = s.anchorNode.parentElement
-		var guida = s.anchorNode.substringData(s.anchorOffset,20)
-		var author
-		var date
-		if (compatibleExtremes(s)) {
-			var spanId = 'span-'+ ($('span').length+1)
-			var pos = dad.childNodes.indexOf(s.anchorNode)
-			var n = {
-				type: type,
-				id: spanId,
-				node: dad.id,
-				pos: pos,
-				guide: guida,
-				author: author,
-				date: date,
-				start: Math.min(s.anchorOffset,s.focusOffset),
-				end: Math.max(s.anchorOffset,s.focusOffset)
-			}
-			//filenotesView[index].data.push(n)
-			filenotesSave[index].data.push(n)
-			insertNote(n,true)
-		}
-		else {
-			// gestire annotazioni per parti di testo alla cazzo
-			alert("Non puoi fare annotazioni per questo tipo di formattazione del testo")
-		}
-}
+// function addNote(type,index) {
+// 		var s = selection()
+// 		var dad = s.anchorNode.parentElement
+// 		var guida = s.anchorNode.substringData(s.anchorOffset,20)
+// 		if (compatibleExtremes(s)) {
+// 			var spanId = 'span-'+ ($('span').length+1)
+// 			var pos = dad.childNodes.indexOf(s.anchorNode)
+// 			var n = {
+// 				type: type,
+// 				id: spanId,
+// 				node: dad.id,
+// 				pos: pos,
+// 				guide: guida,
+// 				author: author,
+// 				date: date,
+// 				start: Math.min(s.anchorOffset,s.focusOffset),
+// 				end: Math.max(s.anchorOffset,s.focusOffset)
+// 			}
+// 			//filenotesView[index].data.push(n)
+// 			filenotesSave[index].data.push(n)
+// 			insertNote(n,true)
+// 		}
+// 		else {
+// 			// gestire annotazioni per parti di testo alla cazzo
+// 			alert("Non puoi fare annotazioni per questo tipo di formattazione del testo")
+// 		}
+// }
 
 function insertNote(note,active) {
 	var r = document.createRange()
-	var node = $('#'+note.node)[0].childNodes[note.pos]
-	r.setStart(node,note.start)
-	r.setEnd(node,note.end)
+	var node = $('#'+note.target.node)[0].childNodes[note.target.pos]
+	r.setStart(node,note.target.start)
+	r.setEnd(node,note.target.end)
 	var span = document.createElement('span')
-	span.setAttribute('id',note.id)
-	span.setAttribute('class',note.type+(active?" edit-"+note.type:''))
+	span.setAttribute('id',note.target.id)
+	span.setAttribute('class',note.annotations[0].type+(active?" edit-"+note.annotations[0].type:''))
 	r.surroundContents(span)
+	console.log(note.annotations[0].type);
 }
 
 function compatibleExtremes(n) {

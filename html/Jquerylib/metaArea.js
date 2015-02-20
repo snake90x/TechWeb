@@ -1,5 +1,7 @@
 var tabs;
 var IdAnnotationCount = 0;
+var buffer;
+buffer = new Array();
 $(document).ready(function(){
 /* implementazione di meta area come una tab JQuery*/
 	tabs = $( "#metaArea" ).tabs({
@@ -36,8 +38,6 @@ function modifica() {
 			var active = $("#mainArea").tabs("option", "active");
      		idd=$("#mainArea ul>li a").eq(active).attr('href');
      		subs=idd.substring(6);
-     		console.log(idd);
-     		console.log(subs);
 			addNote('sentence',subs)
 		})
 		$('#markMain').click(function() {
@@ -46,8 +46,6 @@ function modifica() {
 			var active = $("#mainArea").tabs("option", "active");
      		idd=$("#mainArea ul>li a").eq(active).attr('href');
      		subs=idd.substring(6);
-     		console.log(idd);
-     		console.log(subs);
 			addNote('main',subs)
 		})
 		$('#markSub').click(function() {
@@ -56,8 +54,6 @@ function modifica() {
 			var active = $("#mainArea").tabs("option", "active");
      		idd=$("#mainArea ul>li a").eq(active).attr('href');
      		subs=idd.substring(6);
-     		console.log(idd);
-     		console.log(subs);
 			addNote('sub',subs)
 		})
 		$('#save').click(function() {
@@ -74,31 +70,43 @@ function modifica() {
 
 function addAnnotation (annotation){
 	var annotation=annotation,
-	active = $("#mainArea").tabs("option", "active"),
+	idtemp,
+	dial = "form_"+annotation.annotations[0].type;
+	var active = $("#mainArea").tabs("option", "active"),
 	title=$("#mainArea ul>li a").eq(active).html(),
 	idd=$("#mainArea ul>li a").eq(active).attr('href'),
     subs=idd.substring(6),   //indice tab attiva che corrisponde anche all'indice della struttura fileNotesSave relativa a quello specifico articolo
 	ifdoc=annotation.annotations[0].type,
-	annotationTemplate = "<li id='#{IdAnnotationCount}' class='"+subs+"'>"+
-								"<span class='type'> #{type}</span>"+
-								"</br><span class='annlabel'> #{label}</span>"+
-								"</br><span class='doc'>#{doc}</span></br>"+
-								"<a href='#'><i class='fa fa-floppy-o fa-2x'></i></a>"+"   "+
-								"<a href='#'><i class='fa fa-cog fa-spin fa-2x'></i></a>"+"   "+
-								"<a onclick='deletezzz(this.parentNode)'><i class='fa fa-times fa-2x'></i></a></li>",
 	type=annotation.annotations[0].body.label,
 	label=annotation.annotations[0].label,
 	target=title;
-	console.log(title);
-	console.log(type);
 	if(ifdoc=='hasAuthor'){
 		type='document';
+		dial='form_document';
 		label="Annotazione sull' intero documento";
 	}
-	var li = $( annotationTemplate.replace( /#\{IdAnnotationCount\}/g, "ann" + IdAnnotationCount ).replace( /#\{type\}/g, type ).replace( /#\{label\}/g, label ).replace( /#\{doc\}/g, title));
+	else if(label == "Entità"){
+		dial="form_denotes";
+		}
+	var annotationTemplate = "<li id='#{IdAnnotationCount}' class='"+subs+"'>"+
+							"<span class='type'> #{type}</span>"+
+							"</br><span class='annlabel'> #{label}</span>"+
+							"</br><span class='doc'>#{doc}</span></br>"+
+							"<a href='#'><i class='fa fa-floppy-o fa-2x'></i></a>"+"   "+
+							"<a onclick='modannotation("+dial+",this.parentNode,this.id)'><i class='fa fa-cog fa-spin fa-2x'></i></a>"+"   "+
+							"<a onclick='deletezzz(this.parentNode,this.id)'><i class='fa fa-times fa-2x'></i></a></li>",
+	li = $( annotationTemplate.replace( /#\{IdAnnotationCount\}/g, IdAnnotationCount ).replace( /#\{type\}/g, type ).replace( /#\{label\}/g, label ).replace( /#\{doc\}/g, title));
 	$('#docTempAnnotation').append(li);
+	idtemp = $(li).index();
+	buffer[idtemp] = annotation;
 	IdAnnotationCount++;
 }
-function deletezzz(x) {
+function deletezzz(x,id) {
+	x.parentNode.removeChild(x);
+	buffer[id]=null;
+}
+function modannotation (dial,x,id) {
+	$(dial).dialog('open');
+	buffer[id]=null;
 	x.parentNode.removeChild(x);
 }
